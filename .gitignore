@@ -1,0 +1,15 @@
+
+
+# .gitignore
+.idea
+*.class
+out
+out/production/ProjetoJava
+.mtj.tmp/
+ *.class
+ *.jar
+ *.war
+ *.ear
+ *.iml
+ .nar
+ hs_err_pid
