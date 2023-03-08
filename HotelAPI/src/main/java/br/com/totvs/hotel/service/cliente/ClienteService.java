@@ -55,7 +55,7 @@ public class ClienteService {
     }
 
     public List<ClienteResponseDTO> buscarClientes() {
-        return clienteRepository.findAll().stream().map(clienteModel -> modelMapper.map(clienteModel, ClienteResponseDTO.class)).collect(Collectors.toList());
+        return findAll().stream().map(clienteModel -> modelMapper.map(clienteModel, ClienteResponseDTO.class)).collect(Collectors.toList());
     }
 
     public ClienteResponseDTO buscarCliente(Long id) {
