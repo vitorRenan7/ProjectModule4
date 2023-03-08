@@ -68,26 +68,26 @@ public class ClienteService {
     }
 
     public ResponseEntity<String> deletarCliente(Long id) {
+        findById(id);
         deleteById(id);
         return ResponseEntity.ok("Cliente %d deletado com sucesso!".formatted(id));
     }
 
     public ClienteResponseDTO criarCliente(ClienteRequestDTO clienteRequestDTO) {
         ClienteModel clienteModel = modelMapper.map(clienteRequestDTO, ClienteModel.class);
-        EnderecoModel enderecoModel = enderecoService.criarEndereco(clienteRequestDTO.getCep());
+        EnderecoModel enderecoModel = enderecoService.criarEndereco(clienteRequestDTO.getEndereco().getCep());
+        modelMapper.map(clienteRequestDTO.getEndereco(), enderecoModel);
         clienteModel.setEndereco(enderecoModel);
         return modelMapper.map(save(clienteModel), ClienteResponseDTO.class);
     }
 
     public ClienteResponseDTO atualizarCliente(Long id, ClienteRequestDTO clienteRequestDTO) {
         ClienteModel clienteModel = findById(id);
-        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         modelMapper.map(clienteRequestDTO, clienteModel);
 
         EnderecoModel enderecoModel = clienteModel.getEndereco();
-        modelMapper.map(enderecoService.criarEndereco(clienteRequestDTO.getCep()), enderecoModel);
-        enderecoModel.setComplemento(clienteRequestDTO.getComplemento());
-
+        modelMapper.map(enderecoService.criarEndereco(clienteRequestDTO.getEndereco().getCep()), enderecoModel);
+        modelMapper.map(clienteRequestDTO.getEndereco(), enderecoModel);
         return modelMapper.map(save(clienteModel), ClienteResponseDTO.class);
     }
 

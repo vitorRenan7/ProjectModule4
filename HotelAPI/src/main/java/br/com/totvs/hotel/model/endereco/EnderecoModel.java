@@ -23,6 +23,9 @@ public class EnderecoModel {
     @Column(nullable = false)
     private String logradouro;
 
+    @Column(nullable = false)
+    private Integer numero;
+
     @Column(nullable = true)
     private String complemento;
 

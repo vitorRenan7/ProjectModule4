@@ -9,17 +9,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class EnderecoResponseDTO {
+public class EnderecoRequestDTO {
     private String cep;
-    private String logradouro;
     private Integer numero;
     private String complemento;
-    private String bairro;
-    private String localidade;
-    private String uf;
-    private String ibge;
-    private String gia;
-    private String ddd;
-    private String siafi;
 
 }

@@ -1,4 +1,4 @@
-package br.com.totvs.hotel.dto.cliente;
+package br.com.totvs.hotel.dto.recepcionista;
 
 import br.com.totvs.hotel.dto.pessoa.PessoaRequestDTO;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ClienteRequestDTO extends PessoaRequestDTO {
-    private String email;
+public class RecepcionistaRequestDTO extends PessoaRequestDTO {
+    private Integer salario;
 
 }
