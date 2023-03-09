@@ -33,7 +33,7 @@ public class ClienteService {
     }
 
     private ClienteModel findById(Long id) {
-        return clienteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente com o id %d não encontrado.".formatted(id)));
+        return clienteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     private void deleteAll() {
@@ -61,6 +61,7 @@ public class ClienteService {
     }
 
     public void deletarCliente(Long id) {
+        findById(id);
         deleteById(id);
     }
 

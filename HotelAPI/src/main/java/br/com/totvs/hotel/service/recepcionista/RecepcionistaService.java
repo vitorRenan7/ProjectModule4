@@ -6,6 +6,7 @@ import br.com.totvs.hotel.model.endereco.EnderecoModel;
 import br.com.totvs.hotel.model.recepcionista.RecepcionistaModel;
 import br.com.totvs.hotel.repository.recepcionista.RecepcionistaRepository;
 import br.com.totvs.hotel.service.endereco.EnderecoService;
+import br.com.totvs.hotel.service.pessoa.PessoaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RecepcionistaService {
+public class RecepcionistaService extends PessoaService {
     @Autowired
     private RecepcionistaRepository recepcionistaRepository;
 
@@ -31,7 +32,7 @@ public class RecepcionistaService {
     }
 
     private RecepcionistaModel findById(Long id) {
-        return recepcionistaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recepcionista com id %d não encontrado.".formatted(id)));
+        return recepcionistaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     private void deleteAll() {
@@ -59,24 +60,17 @@ public class RecepcionistaService {
     }
 
     public void deletarRecepcionista(Long id) {
+        findById(id);
         deleteById(id);
     }
 
     public RecepcionistaResponseDTO cirarRecepcionista(RecepcionistaRequestDTO recepcionistaRequestDTO) {
-        RecepcionistaModel recepcionistaModel = modelMapper.map(recepcionistaRequestDTO, RecepcionistaModel.class);
-        EnderecoModel enderecoModel = enderecoService.criarEndereco(recepcionistaRequestDTO.getEndereco().getCep());
-        recepcionistaModel.setEndereco(enderecoModel);
-        modelMapper.map(recepcionistaRequestDTO.getEndereco(), enderecoModel);
+        RecepcionistaModel recepcionistaModel = super.criarPessoa(RecepcionistaModel.class, recepcionistaRequestDTO);
         return modelMapper.map(save(recepcionistaModel), RecepcionistaResponseDTO.class);
     }
 
     public RecepcionistaResponseDTO atualizarRecepcionista(Long id, RecepcionistaRequestDTO recepcionistaRequestDTO) {
-        RecepcionistaModel recepcionistaModel = findById(id);
-        modelMapper.map(recepcionistaRequestDTO, recepcionistaModel);
-
-        EnderecoModel enderecoModel = recepcionistaModel.getEndereco();
-        modelMapper.map(enderecoService.criarEndereco(recepcionistaRequestDTO.getEndereco().getCep()), enderecoModel);
-        modelMapper.map(recepcionistaRequestDTO.getEndereco(), enderecoModel);
+        RecepcionistaModel recepcionistaModel = super.atualizarPessoa(recepcionistaRequestDTO, findById(id));
         return modelMapper.map(save(recepcionistaModel), RecepcionistaResponseDTO.class);
     }
 
