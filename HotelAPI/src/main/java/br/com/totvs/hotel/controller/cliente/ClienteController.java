@@ -29,13 +29,15 @@ public class ClienteController {
     }
 
     @DeleteMapping("/")
-    public ResponseEntity<String> deletarClientes() {
-        return clienteService.deletarClientes();
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarClientes() {
+        clienteService.deletarClientes();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarCliente(@PathVariable("id") Long id) {
-        return clienteService.deletarCliente(id);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarCliente(@PathVariable("id") Long id) {
+        clienteService.deletarCliente(id);
     }
 
     @PostMapping("/")

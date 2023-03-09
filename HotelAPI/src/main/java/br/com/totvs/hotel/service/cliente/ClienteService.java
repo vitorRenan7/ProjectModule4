@@ -6,7 +6,6 @@ import br.com.totvs.hotel.model.cliente.ClienteModel;
 import br.com.totvs.hotel.model.endereco.EnderecoModel;
 import br.com.totvs.hotel.repository.cliente.ClienteRepository;
 import br.com.totvs.hotel.service.endereco.EnderecoService;
-import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,12 +33,7 @@ public class ClienteService {
     }
 
     private ClienteModel findById(Long id) {
-        Optional<ClienteModel> clienteModelOptional = clienteRepository.findById(id);
-
-        if (clienteModelOptional.isPresent()) {
-            return clienteModelOptional.get();
-        }
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente %d não encontrado!".formatted(id));
+        return clienteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente com o id %d não encontrado.".formatted(id)));
     }
 
     private void deleteAll() {
@@ -62,22 +56,19 @@ public class ClienteService {
         return modelMapper.map(findById(id), ClienteResponseDTO.class);
     }
 
-    public ResponseEntity<String> deletarClientes() {
+    public void deletarClientes() {
         deleteAll();
-        return ResponseEntity.ok("Clientes deletados com sucesso!");
     }
 
-    public ResponseEntity<String> deletarCliente(Long id) {
-        findById(id);
+    public void deletarCliente(Long id) {
         deleteById(id);
-        return ResponseEntity.ok("Cliente %d deletado com sucesso!".formatted(id));
     }
 
     public ClienteResponseDTO criarCliente(ClienteRequestDTO clienteRequestDTO) {
         ClienteModel clienteModel = modelMapper.map(clienteRequestDTO, ClienteModel.class);
         EnderecoModel enderecoModel = enderecoService.criarEndereco(clienteRequestDTO.getEndereco().getCep());
-        modelMapper.map(clienteRequestDTO.getEndereco(), enderecoModel);
         clienteModel.setEndereco(enderecoModel);
+        modelMapper.map(clienteRequestDTO.getEndereco(), enderecoModel);
         return modelMapper.map(save(clienteModel), ClienteResponseDTO.class);
     }
 
@@ -86,8 +77,8 @@ public class ClienteService {
         modelMapper.map(clienteRequestDTO, clienteModel);
 
         EnderecoModel enderecoModel = clienteModel.getEndereco();
-        modelMapper.map(enderecoService.criarEndereco(clienteRequestDTO.getEndereco().getCep()), enderecoModel);
         modelMapper.map(clienteRequestDTO.getEndereco(), enderecoModel);
+        modelMapper.map(enderecoService.criarEndereco(clienteRequestDTO.getEndereco().getCep()), enderecoModel);
         return modelMapper.map(save(clienteModel), ClienteResponseDTO.class);
     }
 
