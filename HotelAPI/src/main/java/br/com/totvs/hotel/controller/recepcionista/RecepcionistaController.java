@@ -3,10 +3,15 @@ package br.com.totvs.hotel.controller.recepcionista;
 import br.com.totvs.hotel.dto.recepcionista.RecepcionistaRequestDTO;
 import br.com.totvs.hotel.dto.recepcionista.RecepcionistaResponseDTO;
 import br.com.totvs.hotel.service.recepcionista.RecepcionistaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -41,13 +46,13 @@ public class RecepcionistaController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public RecepcionistaResponseDTO criarRecepcionista(@RequestBody RecepcionistaRequestDTO recepcionistaRequestDTO) {
+    public RecepcionistaResponseDTO criarRecepcionista(@Valid @RequestBody RecepcionistaRequestDTO recepcionistaRequestDTO) {
         return recepcionistaService.cirarRecepcionista(recepcionistaRequestDTO);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public RecepcionistaResponseDTO atualizarRecepcionista(@PathVariable("id") Long id, @RequestBody RecepcionistaRequestDTO recepcionistaRequestDTO) {
+    public RecepcionistaResponseDTO atualizarRecepcionista(@Valid @PathVariable("id") Long id, @RequestBody RecepcionistaRequestDTO recepcionistaRequestDTO) {
         return recepcionistaService.atualizarRecepcionista(id, recepcionistaRequestDTO);
     }
 
