@@ -2,10 +2,12 @@ package br.com.totvs.hotel.service.cliente;
 
 import br.com.totvs.hotel.dto.cliente.ClienteRequestDTO;
 import br.com.totvs.hotel.dto.cliente.ClienteResponseDTO;
+import br.com.totvs.hotel.dto.pessoa.PessoaRequestDTO;
 import br.com.totvs.hotel.model.cliente.ClienteModel;
 import br.com.totvs.hotel.model.endereco.EnderecoModel;
 import br.com.totvs.hotel.repository.cliente.ClienteRepository;
 import br.com.totvs.hotel.service.endereco.EnderecoService;
+import br.com.totvs.hotel.service.pessoa.PessoaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ClienteService {
+public class ClienteService extends PessoaService {
     @Autowired
     private ClienteRepository clienteRepository;
 
@@ -66,20 +68,16 @@ public class ClienteService {
     }
 
     public ClienteResponseDTO criarCliente(ClienteRequestDTO clienteRequestDTO) {
-        ClienteModel clienteModel = modelMapper.map(clienteRequestDTO, ClienteModel.class);
-        EnderecoModel enderecoModel = enderecoService.criarEndereco(clienteRequestDTO.getEndereco().getCep());
-        clienteModel.setEndereco(enderecoModel);
-        modelMapper.map(clienteRequestDTO.getEndereco(), enderecoModel);
+        ClienteModel clienteModel = super.criarPessoa(ClienteModel.class, clienteRequestDTO);
         return modelMapper.map(save(clienteModel), ClienteResponseDTO.class);
     }
 
     public ClienteResponseDTO atualizarCliente(Long id, ClienteRequestDTO clienteRequestDTO) {
-        ClienteModel clienteModel = findById(id);
-        modelMapper.map(clienteRequestDTO, clienteModel);
+        if (clienteRequestDTO.getEmail() != null) {
+            validarCampo(clienteRequestDTO, "email");
+        }
 
-        EnderecoModel enderecoModel = clienteModel.getEndereco();
-        modelMapper.map(clienteRequestDTO.getEndereco(), enderecoModel);
-        modelMapper.map(enderecoService.criarEndereco(clienteRequestDTO.getEndereco().getCep()), enderecoModel);
+        ClienteModel clienteModel = super.atualizarPessoa(clienteRequestDTO, findById(id));
         return modelMapper.map(save(clienteModel), ClienteResponseDTO.class);
     }
 

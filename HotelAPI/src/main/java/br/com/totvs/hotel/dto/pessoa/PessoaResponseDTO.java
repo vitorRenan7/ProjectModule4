@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class PessoaResponseDTO {
+    private Long id;
     private String nome;
     private String sobrenome;
     private String rg;

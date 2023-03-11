@@ -10,6 +10,10 @@ public class CEPValidator implements ConstraintValidator<CEP, String> {
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+        if (s == null) {
+            return false;
+        }
+
         String expression = "^([0-9]{5})-?([0-9]{3})$";
         Pattern pattern = Pattern.compile(expression);
         Matcher matcher = pattern.matcher(s);

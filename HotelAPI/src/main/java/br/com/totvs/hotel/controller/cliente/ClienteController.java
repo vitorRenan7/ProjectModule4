@@ -3,6 +3,7 @@ package br.com.totvs.hotel.controller.cliente;
 import br.com.totvs.hotel.dto.cliente.ClienteRequestDTO;
 import br.com.totvs.hotel.dto.cliente.ClienteResponseDTO;
 import br.com.totvs.hotel.service.cliente.ClienteService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +43,7 @@ public class ClienteController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public ClienteResponseDTO criarCliente(@RequestBody ClienteRequestDTO clienteRequestDTO) {
+    public ClienteResponseDTO criarCliente(@Valid @RequestBody ClienteRequestDTO clienteRequestDTO) {
         return clienteService.criarCliente(clienteRequestDTO);
     }
 

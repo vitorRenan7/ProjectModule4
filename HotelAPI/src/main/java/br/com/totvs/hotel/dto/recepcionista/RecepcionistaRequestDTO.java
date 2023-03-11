@@ -13,8 +13,8 @@ import org.hibernate.validator.constraints.Range;
 @Getter
 @Setter
 public class RecepcionistaRequestDTO extends PessoaRequestDTO {
-    @NotNull(message = "salario não pode ser nulo")
     @Range(min = 1, max = 1000000, message = "salario precisa estar entre 1 e 1000000")
+    @NotNull(message = "salario não pode ser nulo")
     private Integer salario;
 
 }

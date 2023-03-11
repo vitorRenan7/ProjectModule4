@@ -39,10 +39,10 @@ public class EnderecoService {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             EnderecoModel enderecoModel = gson.fromJson(response.body(), EnderecoModel.class);
             if (enderecoModel.getBairro() == null) {
-                throw new RuntimeException("cep informado não existe");
+                throw new IllegalArgumentException("cep informado não existe");
             }
             return enderecoModel;
-        } catch (IOException | InterruptedException | RuntimeException error) {
+        } catch (IOException | InterruptedException | IllegalArgumentException error) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, error.getMessage());
         }
     }

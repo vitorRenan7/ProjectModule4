@@ -70,6 +70,10 @@ public class RecepcionistaService extends PessoaService {
     }
 
     public RecepcionistaResponseDTO atualizarRecepcionista(Long id, RecepcionistaRequestDTO recepcionistaRequestDTO) {
+        if (recepcionistaRequestDTO.getSalario() != null) {
+            validarCampo(recepcionistaRequestDTO, "salario");
+        }
+
         RecepcionistaModel recepcionistaModel = super.atualizarPessoa(recepcionistaRequestDTO, findById(id));
         return modelMapper.map(save(recepcionistaModel), RecepcionistaResponseDTO.class);
     }

@@ -18,6 +18,10 @@ public class AgeValidator implements ConstraintValidator<Age, LocalDate> {
 
     @Override
     public boolean isValid(LocalDate localDate, ConstraintValidatorContext constraintValidatorContext) {
+        if (localDate == null) {
+            return false;
+        }
+
         LocalDate dataAtual = LocalDate.now();
         Integer diferencaAno = dataAtual.minusYears(localDate.getYear()).getYear();
 

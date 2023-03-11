@@ -9,6 +9,10 @@ import java.util.regex.Pattern;
 public class RGValidator implements ConstraintValidator<RG, String> {
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+        if (s == null) {
+            return false;
+        }
+
         String expression = "^([0-9]{1,3}).?([0-9]{1,3}).?([0-9]{1,3})-?([0-9Xx])$";
         Pattern pattern = Pattern.compile(expression);
         Matcher matcher = pattern.matcher(s);
