@@ -4,6 +4,7 @@ import br.com.totvs.hotel.model.endereco.EnderecoModel;
 import br.com.totvs.hotel.repository.endereco.EnderecoRepository;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -31,14 +32,18 @@ public class EnderecoService {
         try {
             request = HttpRequest.newBuilder(new URI("https://viacep.com.br/ws/%s/json/".formatted(cep))).GET().build();
         } catch (URISyntaxException error) {
-            throw new RuntimeException(error.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, error.getMessage());
         }
 
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return gson.fromJson(response.body(), EnderecoModel.class);
-        } catch (IOException | InterruptedException error) {
-            throw new RuntimeException(error.getMessage());
+            EnderecoModel enderecoModel = gson.fromJson(response.body(), EnderecoModel.class);
+            if (enderecoModel.getBairro() == null) {
+                throw new RuntimeException("cep informado não existe");
+            }
+            return enderecoModel;
+        } catch (IOException | InterruptedException | RuntimeException error) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, error.getMessage());
         }
     }
 

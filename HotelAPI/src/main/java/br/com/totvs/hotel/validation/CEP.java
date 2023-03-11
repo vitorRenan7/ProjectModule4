@@ -10,12 +10,10 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = AgeValidator.class)
-public @interface Age {
+@Constraint(validatedBy = CEPValidator.class)
+public @interface CEP {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-    String message() default "idade informada inválida";
-    int minimum() default 0;
-    int maximum() default 100;
+    String message() default "cep informado é inválido";
 
 }

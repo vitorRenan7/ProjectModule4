@@ -4,6 +4,7 @@ import br.com.totvs.hotel.dto.pessoa.PessoaRequestDTO;
 import br.com.totvs.hotel.model.endereco.EnderecoModel;
 import br.com.totvs.hotel.model.pessoa.PessoaModel;
 import br.com.totvs.hotel.service.endereco.EnderecoService;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
