@@ -2,21 +2,18 @@ package br.com.totvs.hotel.service.cliente;
 
 import br.com.totvs.hotel.dto.cliente.ClienteRequestDTO;
 import br.com.totvs.hotel.dto.cliente.ClienteResponseDTO;
-import br.com.totvs.hotel.dto.pessoa.PessoaRequestDTO;
 import br.com.totvs.hotel.model.cliente.ClienteModel;
-import br.com.totvs.hotel.model.endereco.EnderecoModel;
 import br.com.totvs.hotel.repository.cliente.ClienteRepository;
+import br.com.totvs.hotel.service.application.ApplicationService;
 import br.com.totvs.hotel.service.endereco.EnderecoService;
 import br.com.totvs.hotel.service.pessoa.PessoaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,13 +25,16 @@ public class ClienteService extends PessoaService {
     private EnderecoService enderecoService;
 
     @Autowired
+    private ApplicationService applicationService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
-    private List<ClienteModel> findAll() {
+    public List<ClienteModel> findAll() {
         return clienteRepository.findAll();
     }
 
-    private ClienteModel findById(Long id) {
+    public ClienteModel findById(Long id) {
         return clienteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
@@ -73,10 +73,7 @@ public class ClienteService extends PessoaService {
     }
 
     public ClienteResponseDTO atualizarCliente(Long id, ClienteRequestDTO clienteRequestDTO) {
-        if (clienteRequestDTO.getEmail() != null) {
-            validarCampo(clienteRequestDTO, "email");
-        }
-
+        applicationService.validarCampo(clienteRequestDTO, clienteRequestDTO.getEmail(), "email");
         ClienteModel clienteModel = super.atualizarPessoa(clienteRequestDTO, findById(id));
         return modelMapper.map(save(clienteModel), ClienteResponseDTO.class);
     }

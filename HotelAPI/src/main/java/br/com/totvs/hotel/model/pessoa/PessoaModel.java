@@ -37,6 +37,7 @@ public abstract class PessoaModel {
     private LocalDate dataNascimento;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_endereco")
     private EnderecoModel endereco;
 
 }

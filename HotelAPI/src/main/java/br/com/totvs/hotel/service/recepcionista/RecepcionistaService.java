@@ -2,9 +2,9 @@ package br.com.totvs.hotel.service.recepcionista;
 
 import br.com.totvs.hotel.dto.recepcionista.RecepcionistaRequestDTO;
 import br.com.totvs.hotel.dto.recepcionista.RecepcionistaResponseDTO;
-import br.com.totvs.hotel.model.endereco.EnderecoModel;
 import br.com.totvs.hotel.model.recepcionista.RecepcionistaModel;
 import br.com.totvs.hotel.repository.recepcionista.RecepcionistaRepository;
+import br.com.totvs.hotel.service.application.ApplicationService;
 import br.com.totvs.hotel.service.endereco.EnderecoService;
 import br.com.totvs.hotel.service.pessoa.PessoaService;
 import org.modelmapper.ModelMapper;
@@ -23,6 +23,9 @@ public class RecepcionistaService extends PessoaService {
 
     @Autowired
     private EnderecoService enderecoService;
+
+    @Autowired
+    private ApplicationService applicationService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -70,10 +73,7 @@ public class RecepcionistaService extends PessoaService {
     }
 
     public RecepcionistaResponseDTO atualizarRecepcionista(Long id, RecepcionistaRequestDTO recepcionistaRequestDTO) {
-        if (recepcionistaRequestDTO.getSalario() != null) {
-            validarCampo(recepcionistaRequestDTO, "salario");
-        }
-
+        applicationService.validarCampo(recepcionistaRequestDTO, recepcionistaRequestDTO.getSalario(), "salario");
         RecepcionistaModel recepcionistaModel = super.atualizarPessoa(recepcionistaRequestDTO, findById(id));
         return modelMapper.map(save(recepcionistaModel), RecepcionistaResponseDTO.class);
     }

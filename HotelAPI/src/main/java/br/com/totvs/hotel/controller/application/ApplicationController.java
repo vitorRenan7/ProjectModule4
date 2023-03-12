@@ -1,4 +1,4 @@
-package br.com.totvs.hotel;
+package br.com.totvs.hotel.controller.application;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
