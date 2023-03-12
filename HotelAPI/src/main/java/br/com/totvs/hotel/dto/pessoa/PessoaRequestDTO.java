@@ -37,6 +37,7 @@ public class PessoaRequestDTO {
     private String cpf;
 
     @Age(message = "dataNascimento informada é inválida")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @NotNull(message = "dataNascimento não pode ser nulo")
     private LocalDate dataNascimento;

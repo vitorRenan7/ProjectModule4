@@ -1,6 +1,7 @@
 package br.com.totvs.hotel.dto.pessoa;
 
 import br.com.totvs.hotel.dto.endereco.EnderecoResponseDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,10 @@ public class PessoaResponseDTO {
     private String sobrenome;
     private String rg;
     private String cpf;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
+
     private EnderecoResponseDTO endereco;
 
 }
