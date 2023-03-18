@@ -72,6 +72,7 @@ public class QuartoService {
         applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getDescricao(), "descricao");
         applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getPrecoHora(), "precoHora");
         applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getCategoria(), "categoria");
+        applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getSituacao(), "situacao");
         applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getImagens(), "imagens");
 
         QuartoModel quartoModel = findById(id);

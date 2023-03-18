@@ -54,6 +54,10 @@ public class ClienteService extends PessoaService {
         return findAll().stream().map(clienteModel -> modelMapper.map(clienteModel, ClienteResponseDTO.class)).collect(Collectors.toList());
     }
 
+    public List<ClienteResponseDTO> buscarClientes(String nome) {
+        return clienteRepository.buscarClientesPorNomeCompleto(nome).stream().map(clienteModel -> modelMapper.map(clienteModel, ClienteResponseDTO.class)).collect(Collectors.toList());
+    }
+
     public ClienteResponseDTO buscarCliente(Long id) {
         return modelMapper.map(findById(id), ClienteResponseDTO.class);
     }

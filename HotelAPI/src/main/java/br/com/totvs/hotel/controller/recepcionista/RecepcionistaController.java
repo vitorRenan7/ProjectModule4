@@ -6,12 +6,8 @@ import br.com.totvs.hotel.service.recepcionista.RecepcionistaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ProblemDetail;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -24,6 +20,12 @@ public class RecepcionistaController {
     @ResponseStatus(HttpStatus.OK)
     public List<RecepcionistaResponseDTO> buscarRecepcionistas() {
         return recepcionistaService.buscarRecepcionistas();
+    }
+
+    @GetMapping("/filtro")
+    @ResponseStatus(HttpStatus.OK)
+    public List<RecepcionistaResponseDTO> buscarRecepcionistas(@RequestParam("nome") String nome) {
+        return recepcionistaService.buscarRecepcionistas(nome);
     }
 
     @GetMapping("/{id}")
@@ -47,7 +49,7 @@ public class RecepcionistaController {
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public RecepcionistaResponseDTO criarRecepcionista(@Valid @RequestBody RecepcionistaRequestDTO recepcionistaRequestDTO) {
-        return recepcionistaService.cirarRecepcionista(recepcionistaRequestDTO);
+        return recepcionistaService.criarRecepcionista(recepcionistaRequestDTO);
     }
 
     @PutMapping("/{id}")

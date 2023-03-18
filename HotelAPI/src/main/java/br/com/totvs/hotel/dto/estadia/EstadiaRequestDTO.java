@@ -1,5 +1,6 @@
 package br.com.totvs.hotel.dto.estadia;
 
+import br.com.totvs.hotel.enumeration.estadia.AndamentoEstadia;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +28,9 @@ public class EstadiaRequestDTO {
     @Future(message = "fim precisa ser uma data futura")
     @NotNull(message = "fim não pode ser nulo")
     private LocalDateTime fim;
+
+    @NotNull(message = "andamento não pode ser nulo")
+    private AndamentoEstadia andamento;
 
     @NotNull(message = "cliente não pode ser nulo")
     private Long cliente;

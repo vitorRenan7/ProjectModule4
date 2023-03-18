@@ -1,6 +1,7 @@
 package br.com.totvs.hotel.dto.quarto;
 
 import br.com.totvs.hotel.enumeration.quarto.CategoriaQuarto;
+import br.com.totvs.hotel.enumeration.quarto.SituacaoQuarto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +31,9 @@ public class QuartoRequestDTO {
 
     @NotNull(message = "categoria não pode ser nula")
     private CategoriaQuarto categoria;
+
+    @NotNull(message = "situacao não pode ser nula")
+    private SituacaoQuarto situacao;
 
     @NotNull(message = "imagens não pode ser nula")
     @NotEmpty(message = "imagens não pode ser vazia")

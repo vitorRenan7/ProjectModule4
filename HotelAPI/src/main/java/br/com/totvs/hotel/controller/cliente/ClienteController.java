@@ -23,6 +23,12 @@ public class ClienteController {
         return clienteService.buscarClientes();
     }
 
+    @GetMapping("/filtro")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ClienteResponseDTO> buscarClientes(@RequestParam("nome") String nome) {
+        return clienteService.buscarClientes(nome);
+    }
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ClienteResponseDTO buscarCliente(@PathVariable("id") Long id) {

@@ -1,6 +1,7 @@
 package br.com.totvs.hotel.model.quarto;
 
 import br.com.totvs.hotel.enumeration.quarto.CategoriaQuarto;
+import br.com.totvs.hotel.enumeration.quarto.SituacaoQuarto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,6 +33,10 @@ public class QuartoModel {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private CategoriaQuarto categoria;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private SituacaoQuarto situacao;
 
     @ElementCollection
     @CollectionTable(name = "table_quarto_imagens", joinColumns = @JoinColumn(name = "id_quarto"))

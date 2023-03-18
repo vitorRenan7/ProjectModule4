@@ -1,6 +1,7 @@
 package br.com.totvs.hotel.dto.quarto;
 
 import br.com.totvs.hotel.enumeration.quarto.CategoriaQuarto;
+import br.com.totvs.hotel.enumeration.quarto.SituacaoQuarto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class QuartoResponseDTO {
     private String descricao;
     private Double precoHora;
     private CategoriaQuarto categoria;
+    private SituacaoQuarto situacao;
     private List<String> imagens;
 
 }

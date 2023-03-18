@@ -85,6 +85,7 @@ public class EstadiaService {
     public EstadiaResponseDTO atualizarEstadia(Long id, EstadiaRequestDTO estadiaRequestDTO) {
         applicationService.validarCampo(estadiaRequestDTO, estadiaRequestDTO.getInicio(), "inicio");
         applicationService.validarCampo(estadiaRequestDTO, estadiaRequestDTO.getFim(), "fim");
+        applicationService.validarCampo(estadiaRequestDTO, estadiaRequestDTO.getAndamento(), "andamento");
         applicationService.validarCampo(estadiaRequestDTO, estadiaRequestDTO.getCliente(), "cliente");
         applicationService.validarCampo(estadiaRequestDTO, estadiaRequestDTO.getQuarto(), "quarto");
 

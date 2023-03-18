@@ -54,6 +54,10 @@ public class RecepcionistaService extends PessoaService {
         return findAll().stream().map(recepcionistaModel -> modelMapper.map(recepcionistaModel, RecepcionistaResponseDTO.class)).collect(Collectors.toList());
     }
 
+    public List<RecepcionistaResponseDTO> buscarRecepcionistas(String nome) {
+        return recepcionistaRepository.buscarRecepcionistasPorNomeCompleto(nome).stream().map(recepcionistaModel -> modelMapper.map(recepcionistaModel, RecepcionistaResponseDTO.class)).collect(Collectors.toList());
+    }
+
     public RecepcionistaResponseDTO buscarRecepcionista(Long id) {
         return modelMapper.map(findById(id), RecepcionistaResponseDTO.class);
     }
@@ -67,7 +71,7 @@ public class RecepcionistaService extends PessoaService {
         deleteById(id);
     }
 
-    public RecepcionistaResponseDTO cirarRecepcionista(RecepcionistaRequestDTO recepcionistaRequestDTO) {
+    public RecepcionistaResponseDTO criarRecepcionista(RecepcionistaRequestDTO recepcionistaRequestDTO) {
         RecepcionistaModel recepcionistaModel = super.criarPessoa(RecepcionistaModel.class, recepcionistaRequestDTO);
         return modelMapper.map(save(recepcionistaModel), RecepcionistaResponseDTO.class);
     }

@@ -1,8 +1,10 @@
 package br.com.totvs.hotel.model.estadia;
 
+import br.com.totvs.hotel.enumeration.estadia.AndamentoEstadia;
 import br.com.totvs.hotel.model.cliente.ClienteModel;
 import br.com.totvs.hotel.model.quarto.QuartoModel;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,10 @@ public class EstadiaModel {
 
     @Column(nullable = false)
     private LocalDateTime fim;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private AndamentoEstadia andamento;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_cliente", nullable = false)
