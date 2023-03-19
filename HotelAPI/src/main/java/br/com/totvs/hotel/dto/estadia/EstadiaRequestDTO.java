@@ -29,9 +29,6 @@ public class EstadiaRequestDTO {
     @NotNull(message = "fim não pode ser nulo")
     private LocalDateTime fim;
 
-    @NotNull(message = "andamento não pode ser nulo")
-    private AndamentoEstadia andamento;
-
     @NotNull(message = "cliente não pode ser nulo")
     private Long cliente;
 

@@ -25,15 +25,12 @@ public class QuartoRequestDTO {
     @NotBlank(message = "descricao não pode ser vazia")
     private String descricao;
 
-    @Range(min = 1, max = 99999, message = "precoHora precisa estar entre 1 e 99999")
-    @NotNull(message = "precoHora não pode ser nulo")
-    private Double precoHora;
-
     @NotNull(message = "categoria não pode ser nula")
     private CategoriaQuarto categoria;
 
-    @NotNull(message = "situacao não pode ser nula")
-    private SituacaoQuarto situacao;
+    @Range(min = 1, max = 99999, message = "precoHora precisa estar entre 1 e 99999")
+    @NotNull(message = "precoHora não pode ser nulo")
+    private Double precoHora;
 
     @NotNull(message = "imagens não pode ser nula")
     @NotEmpty(message = "imagens não pode ser vazia")

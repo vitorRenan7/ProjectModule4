@@ -1,6 +1,6 @@
 package br.com.totvs.hotel.dto.pessoa;
 
-import br.com.totvs.hotel.dto.endereco.EnderecoResponseDTO;
+import br.com.totvs.hotel.dto.endereco.EnderecoPessoaDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,16 +13,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-public class PessoaResponseDTO {
-    private Long id;
-    private String nome;
-    private String sobrenome;
-    private String rg;
-    private String cpf;
+public abstract class PessoaResponseDTO extends PessoaDTO {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
-    private EnderecoResponseDTO endereco;
+    private EnderecoPessoaDTO endereco;
 
 }

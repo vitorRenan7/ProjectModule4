@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-public class PessoaRequestDTO {
+public abstract class PessoaRequestDTO {
     @Size(min = 1, max = 200, message = "nome precisa ter até 200 caracteres")
     @NotBlank(message = "nome não pode ser vazio")
     private String nome;

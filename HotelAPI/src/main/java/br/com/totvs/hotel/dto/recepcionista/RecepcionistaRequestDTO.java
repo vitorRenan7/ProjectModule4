@@ -1,20 +1,24 @@
 package br.com.totvs.hotel.dto.recepcionista;
 
 import br.com.totvs.hotel.dto.pessoa.PessoaRequestDTO;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Range;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class RecepcionistaRequestDTO extends PessoaRequestDTO {
-    @Range(min = 1, max = 1000000, message = "salario precisa estar entre 1 e 1000000")
-    @NotNull(message = "salario não pode ser nulo")
-    private Integer salario;
+    @NotBlank(message = "usuario não pode ser vazio")
+    @Size(min = 3, max = 30, message = "usuario precisar ter entre 3 e 30 caracteres")
+    private String usuario;
+
+    @NotBlank(message = "senha não pode ser vazia")
+    @Size(min = 8, max = 30, message = "senha precisa ter entre 8 e 30 caracteres")
+    private String senha;
 
 }

@@ -46,7 +46,7 @@ public class ClienteService extends PessoaService {
         clienteRepository.delete(findById(id));
     }
 
-    private ClienteModel save(ClienteModel clienteModel) {
+    public ClienteModel save(ClienteModel clienteModel) {
         return clienteRepository.save(clienteModel);
     }
 
@@ -78,6 +78,7 @@ public class ClienteService extends PessoaService {
 
     public ClienteResponseDTO atualizarCliente(Long id, ClienteRequestDTO clienteRequestDTO) {
         applicationService.validarCampo(clienteRequestDTO, clienteRequestDTO.getEmail(), "email");
+        applicationService.validarCampo(clienteRequestDTO, clienteRequestDTO.getCelular(), "celular");
         ClienteModel clienteModel = super.atualizarPessoa(clienteRequestDTO, findById(id));
         return modelMapper.map(save(clienteModel), ClienteResponseDTO.class);
     }

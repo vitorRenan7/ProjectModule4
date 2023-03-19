@@ -77,7 +77,8 @@ public class RecepcionistaService extends PessoaService {
     }
 
     public RecepcionistaResponseDTO atualizarRecepcionista(Long id, RecepcionistaRequestDTO recepcionistaRequestDTO) {
-        applicationService.validarCampo(recepcionistaRequestDTO, recepcionistaRequestDTO.getSalario(), "salario");
+        applicationService.validarCampo(recepcionistaRequestDTO, recepcionistaRequestDTO.getUsuario(), "usuario");
+        applicationService.validarCampo(recepcionistaRequestDTO, recepcionistaRequestDTO.getSenha(), "senha");
         RecepcionistaModel recepcionistaModel = super.atualizarPessoa(recepcionistaRequestDTO, findById(id));
         return modelMapper.map(save(recepcionistaModel), RecepcionistaResponseDTO.class);
     }

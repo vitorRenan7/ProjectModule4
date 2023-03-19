@@ -2,6 +2,8 @@ package br.com.totvs.hotel.service.estadia;
 
 import br.com.totvs.hotel.dto.estadia.EstadiaRequestDTO;
 import br.com.totvs.hotel.dto.estadia.EstadiaResponseDTO;
+import br.com.totvs.hotel.enumeration.estadia.AndamentoEstadia;
+import br.com.totvs.hotel.enumeration.quarto.SituacaoQuarto;
 import br.com.totvs.hotel.model.cliente.ClienteModel;
 import br.com.totvs.hotel.model.estadia.EstadiaModel;
 import br.com.totvs.hotel.model.quarto.QuartoModel;
@@ -76,8 +78,15 @@ public class EstadiaService {
         EstadiaModel estadiaModel = modelMapper.map(estadiaRequestDTO, EstadiaModel.class);
         ClienteModel clienteModel = clienteService.findById(estadiaRequestDTO.getCliente());
         QuartoModel quartoModel = quartoService.findById(estadiaRequestDTO.getQuarto());
+
+        clienteModel.getEstadias().add(estadiaModel);
         estadiaModel.setCliente(clienteModel);
+
+        quartoModel.getEstadias().add(estadiaModel);
         estadiaModel.setQuarto(quartoModel);
+
+        estadiaModel.setAndamento(AndamentoEstadia.RESERVADA);
+        quartoModel.setSituacao(SituacaoQuarto.RESERVADO);
 
         return modelMapper.map(save(estadiaModel), EstadiaResponseDTO.class);
     }
@@ -85,19 +94,24 @@ public class EstadiaService {
     public EstadiaResponseDTO atualizarEstadia(Long id, EstadiaRequestDTO estadiaRequestDTO) {
         applicationService.validarCampo(estadiaRequestDTO, estadiaRequestDTO.getInicio(), "inicio");
         applicationService.validarCampo(estadiaRequestDTO, estadiaRequestDTO.getFim(), "fim");
-        applicationService.validarCampo(estadiaRequestDTO, estadiaRequestDTO.getAndamento(), "andamento");
         applicationService.validarCampo(estadiaRequestDTO, estadiaRequestDTO.getCliente(), "cliente");
         applicationService.validarCampo(estadiaRequestDTO, estadiaRequestDTO.getQuarto(), "quarto");
 
         EstadiaModel estadiaModel = findById(id);
 
         if (estadiaRequestDTO.getCliente() != null) {
+            estadiaModel.getCliente().getEstadias().remove(estadiaModel);
+
             ClienteModel clienteModel = clienteService.findById(estadiaRequestDTO.getCliente());
+            clienteModel.getEstadias().add(estadiaModel);
             estadiaModel.setCliente(clienteModel);
         }
 
         if (estadiaRequestDTO.getQuarto() != null) {
+            estadiaModel.getQuarto().getEstadias().remove(estadiaModel);
+
             QuartoModel quartoModel = quartoService.findById(estadiaRequestDTO.getQuarto());
+            quartoModel.getEstadias().add(estadiaModel);
             estadiaModel.setQuarto(quartoModel);
         }
 

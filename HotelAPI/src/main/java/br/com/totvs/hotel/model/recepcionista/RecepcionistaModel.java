@@ -19,6 +19,9 @@ public class RecepcionistaModel extends PessoaModel {
     private Long id;
 
     @Column(nullable = false)
-    private Integer salario;
+    private String usuario;
+
+    @Column(nullable = false)
+    private String senha;
 
 }

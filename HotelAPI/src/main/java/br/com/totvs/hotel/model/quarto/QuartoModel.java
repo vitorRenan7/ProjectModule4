@@ -2,12 +2,14 @@ package br.com.totvs.hotel.model.quarto;
 
 import br.com.totvs.hotel.enumeration.quarto.CategoriaQuarto;
 import br.com.totvs.hotel.enumeration.quarto.SituacaoQuarto;
+import br.com.totvs.hotel.model.estadia.EstadiaModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -42,5 +44,9 @@ public class QuartoModel {
     @CollectionTable(name = "table_quarto_imagens", joinColumns = @JoinColumn(name = "id_quarto"))
     @Column(name = "url", length = 65535)
     private List<String> imagens;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_quarto")
+    private List<EstadiaModel> estadias = new ArrayList<EstadiaModel>();
 
 }

@@ -11,6 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RecepcionistaResponseDTO extends PessoaResponseDTO {
-    private Integer salario;
+    private String usuario;
 
 }

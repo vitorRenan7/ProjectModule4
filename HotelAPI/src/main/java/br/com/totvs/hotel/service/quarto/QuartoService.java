@@ -2,6 +2,7 @@ package br.com.totvs.hotel.service.quarto;
 
 import br.com.totvs.hotel.dto.quarto.QuartoRequestDTO;
 import br.com.totvs.hotel.dto.quarto.QuartoResponseDTO;
+import br.com.totvs.hotel.enumeration.quarto.SituacaoQuarto;
 import br.com.totvs.hotel.model.quarto.QuartoModel;
 import br.com.totvs.hotel.repository.quarto.QuartoRepository;
 import br.com.totvs.hotel.service.application.ApplicationService;
@@ -41,7 +42,7 @@ public class QuartoService {
         quartoRepository.deleteById(id);
     }
 
-    private QuartoModel save(QuartoModel quartoModel) {
+    public QuartoModel save(QuartoModel quartoModel) {
         return quartoRepository.save(quartoModel);
     }
 
@@ -63,16 +64,16 @@ public class QuartoService {
     }
 
     public QuartoResponseDTO criarQuarto(QuartoRequestDTO quartoRequestDTO) {
-        QuartoModel quartoModel = save(modelMapper.map(quartoRequestDTO, QuartoModel.class));
-        return modelMapper.map(quartoModel,QuartoResponseDTO.class);
+        QuartoModel quartoModel = modelMapper.map(quartoRequestDTO, QuartoModel.class);
+        quartoModel.setSituacao(SituacaoQuarto.DISPONIVEL);
+        return modelMapper.map(save(quartoModel), QuartoResponseDTO.class);
     }
 
     public QuartoResponseDTO atualizarQuarto(Long id, QuartoRequestDTO quartoRequestDTO) {
         applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getNumero(), "numero");
         applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getDescricao(), "descricao");
-        applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getPrecoHora(), "precoHora");
         applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getCategoria(), "categoria");
-        applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getSituacao(), "situacao");
+        applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getPrecoHora(), "precoHora");
         applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getImagens(), "imagens");
 
         QuartoModel quartoModel = findById(id);
