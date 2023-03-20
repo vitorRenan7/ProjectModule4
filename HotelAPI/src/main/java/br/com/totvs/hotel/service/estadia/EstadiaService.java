@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,6 +60,11 @@ public class EstadiaService {
 
     public List<EstadiaResponseDTO> buscarEstadias() {
         return findAll().stream().map(estadiaModel -> modelMapper.map(estadiaModel, EstadiaResponseDTO.class)).collect(Collectors.toList());
+    }
+
+    public List<EstadiaResponseDTO> buscarEstadias(LocalDateTime dataInicio, LocalDateTime dataFim) {
+        dataFim = dataFim != null ? dataFim : LocalDateTime.now().plusYears(1);
+        return estadiaRepository.buscarEstadiasPorData(dataInicio, dataFim).stream().map(estadiaModel -> modelMapper.map(estadiaModel, EstadiaResponseDTO.class)).collect(Collectors.toList());
     }
 
     public EstadiaResponseDTO buscarEstadia(Long id) {
