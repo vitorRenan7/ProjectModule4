@@ -1,0 +1,54 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container{
+  display: flex;
+  height: 100%;
+  width: 100%;
+
+  .logo{
+    width: 100px;
+    height: 100px;
+  }
+
+  .inp{
+    width: 300px;
+    height: 50px;
+    margin: 5px;
+  }
+
+  .btnEntrar{
+    width: 150px;
+    height: 50px;
+    margin-left: 10px;
+  }
+
+  .classForm{
+    width: 60%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+  }
+
+  .login{
+    display: flex;
+    flex-direction: column;
+  }
+
+  label{
+    color: white;
+    margin-left: 10px;
+  }
+
+
+  .imagem{
+    flex: 1;
+    background-color: aqua;
+  }
+}
