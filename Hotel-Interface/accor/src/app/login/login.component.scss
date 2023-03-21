@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 .container{
@@ -18,22 +19,32 @@
     width: 300px;
     height: 50px;
     margin: 5px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #f2f2f2;
   }
 
   .btnEntrar{
     width: 150px;
     height: 50px;
     margin-left: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #000;
+    color: #f2f2f2;
+    font-weight: bold;
   }
 
   .classForm{
-    width: 60%;
+    width: 66%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: whitesmoke;
+    background-color: #fff;
   }
 
   .login{
@@ -42,13 +53,17 @@
   }
 
   label{
-    color: white;
-    margin-left: 10px;
+    color: #000;
+    margin-left: 5px;
+    font-weight: bold;
   }
 
 
   .imagem{
-    flex: 1;
+    width: 400px;
+    height: 100vh;
     background-color: aqua;
+    background-image: url('../../assets/hotelLogin2.png');
+    background-size: cover
   }
 }
