@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ReservaQuartoComponent } from './reserva-quarto/reserva-quarto.component';
+import { AdministradorComponent } from './administrador/administrador.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ReservaQuartoComponent
+    ReservaQuartoComponent,
+    AdministradorComponent
   ],
   imports: [
     BrowserModule,
