@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "accor-hotels": {
+    "accor": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/accor-hotels",
+            "outputPath": "dist/accor",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "accor-hotels:build:production"
+              "browserTarget": "accor:build:production"
             },
             "development": {
-              "browserTarget": "accor-hotels:build:development"
+              "browserTarget": "accor:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "accor-hotels:build"
+            "browserTarget": "accor:build"
           }
         },
         "test": {
