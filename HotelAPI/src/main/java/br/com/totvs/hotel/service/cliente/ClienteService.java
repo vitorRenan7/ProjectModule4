@@ -3,7 +3,9 @@ package br.com.totvs.hotel.service.cliente;
 import br.com.totvs.hotel.dto.cliente.ClienteRequestDTO;
 import br.com.totvs.hotel.dto.cliente.ClienteResponseDTO;
 import br.com.totvs.hotel.model.cliente.ClienteModel;
+import br.com.totvs.hotel.model.estadia.EstadiaModel;
 import br.com.totvs.hotel.repository.cliente.ClienteRepository;
+import br.com.totvs.hotel.repository.estadia.EstadiaRepository;
 import br.com.totvs.hotel.service.application.ApplicationService;
 import br.com.totvs.hotel.service.endereco.EnderecoService;
 import br.com.totvs.hotel.service.pessoa.PessoaService;
@@ -25,6 +27,9 @@ public class ClienteService extends PessoaService {
     private EnderecoService enderecoService;
 
     @Autowired
+    private EstadiaRepository estadiaRepository;
+
+    @Autowired
     private ApplicationService applicationService;
 
     @Autowired
@@ -43,7 +48,7 @@ public class ClienteService extends PessoaService {
     }
 
     private void deleteById(Long id) {
-        clienteRepository.delete(findById(id));
+        clienteRepository.deleteById(id);
     }
 
     public ClienteModel save(ClienteModel clienteModel) {

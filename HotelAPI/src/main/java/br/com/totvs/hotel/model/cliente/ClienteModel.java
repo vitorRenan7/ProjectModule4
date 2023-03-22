@@ -28,7 +28,7 @@ public class ClienteModel extends PessoaModel {
     @Column(nullable = false)
     private String celular;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_cliente")
     private List<EstadiaModel> estadias = new ArrayList<EstadiaModel>();
 

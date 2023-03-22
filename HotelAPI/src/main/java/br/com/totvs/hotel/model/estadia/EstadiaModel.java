@@ -33,11 +33,11 @@ public class EstadiaModel {
     private AndamentoEstadia andamento;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_cliente", nullable = false)
+    @JoinColumn(name = "id_cliente")
     private ClienteModel cliente;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_quarto", nullable = false)
+    @JoinColumn(name = "id_quarto")
     private QuartoModel quarto;
 
 }
