@@ -45,7 +45,7 @@ public class QuartoModel {
     @Column(name = "url", length = 65535)
     private List<String> imagens;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_quarto")
     private List<EstadiaModel> estadias = new ArrayList<EstadiaModel>();
 
