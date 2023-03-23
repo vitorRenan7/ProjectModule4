@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,6 +59,38 @@ public class EstadiaService {
         return estadiaRepository.save(estadiaModel);
     }
 
+    private boolean conflitoHorario(LocalDateTime x1, LocalDateTime x2, LocalDateTime y1, LocalDateTime y2) {
+        return ((x1.isEqual(y1) || x1.isBefore(y1)) && (x2.isEqual(y1) || x2.isAfter(y1))) ||
+                ((x1.isEqual(y2) || x1.isBefore(y2)) && (x2.isEqual(y2) || x2.isAfter(y2))) ||
+                ((x1.isEqual(y1) || x1.isAfter(y1)) && (x2.isEqual(y2) || x2.isBefore(y2))) ||
+                ((x1.isEqual(y1) || x1.isBefore(y1)) && (x2.isEqual(y2) || x2.isAfter(y2)));
+    }
+
+    private void validarCliente(ClienteModel clienteModel, EstadiaModel estadiaModel) {
+        for (EstadiaModel estadia : clienteModel.getEstadias()) {
+            if (conflitoHorario(estadia.getInicio(), estadia.getFim(), estadiaModel.getInicio(), estadiaModel.getFim()) && !estadia.getId().equals(estadiaModel.getId())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente com ID %d já possui o horário indicado reservado. inicio: %s fim: %s".formatted(clienteModel.getId(), estadia.getInicio(), estadia.getFim()));
+            }
+        }
+    }
+
+    private void validarQuarto(QuartoModel quartoModel, EstadiaModel estadiaModel) {
+        for (EstadiaModel estadia : quartoModel.getEstadias()) {
+            if (conflitoHorario(estadia.getInicio(), estadia.getFim(), estadiaModel.getInicio(), estadiaModel.getFim()) && !estadia.getId().equals(estadiaModel.getId())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quarto com ID %d já possui o horário indicado reservado. inicio: %s fim: %s".formatted(quartoModel.getId(), estadia.getInicio(), estadia.getFim()));
+            }
+        }
+    }
+
+    private void validarEstadia(EstadiaModel estadiaModel) {
+        if (estadiaModel.getInicio().isAfter(estadiaModel.getFim())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data fim precisa ser posterior à data inicio. inicio: %s fim: %s".formatted(estadiaModel.getInicio(), estadiaModel.getFim()));
+        }
+        if (Duration.between(estadiaModel.getInicio(), estadiaModel.getFim()).toHours() < 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Estadia precisa ser de, no mínimo, 1 hora. inicio: %s fim: %s".formatted(estadiaModel.getInicio(), estadiaModel.getFim()));
+        }
+    }
+
     public List<EstadiaResponseDTO> buscarEstadias() {
         return findAll().stream().map(estadiaModel -> modelMapper.map(estadiaModel, EstadiaResponseDTO.class)).collect(Collectors.toList());
     }
@@ -84,6 +117,9 @@ public class EstadiaService {
         EstadiaModel estadiaModel = modelMapper.map(estadiaRequestDTO, EstadiaModel.class);
         ClienteModel clienteModel = clienteService.findById(estadiaRequestDTO.getCliente());
         QuartoModel quartoModel = quartoService.findById(estadiaRequestDTO.getQuarto());
+        validarEstadia(estadiaModel);
+        validarCliente(clienteModel, estadiaModel);
+        validarQuarto(quartoModel, estadiaModel);
 
         clienteModel.getEstadias().add(estadiaModel);
         estadiaModel.setCliente(clienteModel);
@@ -122,6 +158,9 @@ public class EstadiaService {
         }
 
         modelMapper.map(estadiaRequestDTO, estadiaModel);
+        validarEstadia(estadiaModel);
+        validarCliente(estadiaModel.getCliente(), estadiaModel);
+        validarQuarto(estadiaModel.getQuarto(), estadiaModel);
         return modelMapper.map(save(estadiaModel), EstadiaResponseDTO.class);
     }
 
