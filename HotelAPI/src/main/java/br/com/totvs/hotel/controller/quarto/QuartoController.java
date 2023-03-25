@@ -2,6 +2,8 @@ package br.com.totvs.hotel.controller.quarto;
 
 import br.com.totvs.hotel.dto.quarto.QuartoRequestDTO;
 import br.com.totvs.hotel.dto.quarto.QuartoResponseDTO;
+import br.com.totvs.hotel.enumeration.quarto.CategoriaQuarto;
+import br.com.totvs.hotel.enumeration.quarto.SituacaoQuarto;
 import br.com.totvs.hotel.service.quarto.QuartoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,14 @@ public class QuartoController {
     @ResponseStatus(HttpStatus.OK)
     public List<QuartoResponseDTO> buscarQuartos() {
         return quartoService.buscarQuartos();
+    }
+
+    @GetMapping("/filtro")
+    @ResponseStatus(HttpStatus.OK)
+    public List<QuartoResponseDTO> buscarQuartos(
+            @RequestParam(value = "categoria", required = false) CategoriaQuarto categoria,
+            @RequestParam(value = "situacao", required = false) SituacaoQuarto situacao) {
+        return quartoService.buscarQuartos(categoria, situacao);
     }
 
     @GetMapping("/{id}")

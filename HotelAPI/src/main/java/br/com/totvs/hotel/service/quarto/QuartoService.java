@@ -2,18 +2,23 @@ package br.com.totvs.hotel.service.quarto;
 
 import br.com.totvs.hotel.dto.quarto.QuartoRequestDTO;
 import br.com.totvs.hotel.dto.quarto.QuartoResponseDTO;
+import br.com.totvs.hotel.enumeration.quarto.CategoriaQuarto;
 import br.com.totvs.hotel.enumeration.quarto.SituacaoQuarto;
 import br.com.totvs.hotel.model.quarto.QuartoModel;
 import br.com.totvs.hotel.repository.quarto.QuartoRepository;
 import br.com.totvs.hotel.service.application.ApplicationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
 
 @Service
 public class QuartoService {
@@ -48,6 +53,20 @@ public class QuartoService {
 
     public List<QuartoResponseDTO> buscarQuartos() {
         return findAll().stream().map(quartoModel -> modelMapper.map(quartoModel, QuartoResponseDTO.class)).collect(Collectors.toList());
+    }
+
+    public List<QuartoResponseDTO> buscarQuartos(CategoriaQuarto categoria, SituacaoQuarto situacao) {
+        QuartoModel quartoModel = new QuartoModel();
+        quartoModel.setCategoria(categoria);
+        quartoModel.setSituacao(situacao);
+
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching().
+                withIgnoreNullValues().
+                withMatcher("categoria", exact().ignoreCase()).
+                withMatcher("situacao", exact().ignoreCase());
+
+        Example<QuartoModel> example = Example.of(quartoModel, exampleMatcher);
+        return quartoRepository.findAll(example).stream().map(quarto -> modelMapper.map(quarto, QuartoResponseDTO.class)).collect(Collectors.toList());
     }
 
     public QuartoResponseDTO buscarQuarto(Long id) {
