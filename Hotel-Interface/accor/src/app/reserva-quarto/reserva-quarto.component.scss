@@ -1,0 +1,63 @@
+#reserva{
+    position: relative;
+    margin-top: 5px;
+    width:  180vh;
+    height: 98vh;
+    background-color: aqua;
+
+    button{
+        position: relative;
+        margin: 10px;
+        height: 30px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    #buttons-top{
+        position: absolute;
+        overflow: hidden;
+        margin-top: 25px;
+        width: 180vh;
+        height: 50px;
+        background-color: black;
+
+
+
+        .buscar-cliente{
+            float: left;         
+            width: 536px;
+        }
+
+        .cadastro-cliente{
+            float: right;
+            width: 234px;
+        }
+    }
+
+    .lista-quartos{
+        position:  absolute;
+        background-color: red;
+        margin-top: 16vh;
+        width: 180vh;
+        height: 70vh;
+        text-align: center;
+    }
+
+    .button-reservar{
+        position: absolute;
+        display: inline-block;
+        height: 50px;
+        bottom: 2.5vh;
+        width: 180vh;
+        background-color: black;
+
+        .reservar-quarto{
+            float: right;
+            width: 234px;
+        }
+    }
+
+  
+}
