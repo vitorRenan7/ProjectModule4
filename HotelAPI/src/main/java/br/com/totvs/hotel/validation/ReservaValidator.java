@@ -3,21 +3,17 @@ package br.com.totvs.hotel.validation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class IdadeValidator implements ConstraintValidator<Idade, String> {
+public class ReservaValidator implements ConstraintValidator<Reserva, String> {
     private String pattern;
-    private Integer minimum;
-    private Integer maximum;
 
     @Override
-    public void initialize(Idade constraintAnnotation) {
+    public void initialize(Reserva constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
         pattern = constraintAnnotation.pattern();
-        minimum = constraintAnnotation.minimum();
-        maximum = constraintAnnotation.maximum();
     }
 
     @Override
@@ -27,21 +23,13 @@ public class IdadeValidator implements ConstraintValidator<Idade, String> {
         }
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
-        LocalDate localDate;
 
         try {
-            localDate = LocalDate.parse(s, dateTimeFormatter);
+            LocalDateTime.parse(s, dateTimeFormatter);
+            return true;
         } catch (DateTimeParseException exception) {
             return false;
         }
-
-        LocalDate dataAtual = LocalDate.now();
-        Integer diferencaAno = dataAtual.minusYears(localDate.getYear()).getYear();
-
-        if (localDate.isAfter(dataAtual)) {
-            return false;
-        }
-        return !(diferencaAno < minimum | diferencaAno > maximum);
     }
 
 }
