@@ -1,7 +1,7 @@
 package br.com.totvs.hotel.dto.pessoa;
 
 import br.com.totvs.hotel.dto.endereco.EnderecoRequestDTO;
-import br.com.totvs.hotel.validation.Age;
+import br.com.totvs.hotel.validation.Idade;
 import br.com.totvs.hotel.validation.RG;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
@@ -36,7 +36,7 @@ public abstract class PessoaRequestDTO {
     @NotBlank(message = "cpf não pode ser vazio")
     private String cpf;
 
-    @Age(message = "dataNascimento informada é inválida")
+    @Idade(message = "dataNascimento informada é inválida")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @NotNull(message = "dataNascimento não pode ser nulo")
