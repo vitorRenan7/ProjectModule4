@@ -8,9 +8,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestController
@@ -65,7 +67,7 @@ public class EstadiaController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     public EstadiaResponseDTO atualizarEstadia(@PathVariable("id") Long id, @RequestBody EstadiaRequestDTO estadiaRequestDTO) {
         return estadiaService.atualizarEstadia(id, estadiaRequestDTO);
     }
