@@ -20,7 +20,7 @@ public class EnderecoRequestDTO {
     private String cep;
 
     @NotNull(message = "em endereco, o numero não pode ser vazio")
-    @Range(min = 1, max = 9999, message = "em endereco, o numero informado é inválido")
+    @Range(min = 1, max = 100000, message = "em endereco, o numero informado é inválido pois deve estar entre 1 e 100000")
     private Integer numero;
 
     @Size(min = 0, max = 200, message = "em endereco, o complemento deve conter até 200 caracteres")

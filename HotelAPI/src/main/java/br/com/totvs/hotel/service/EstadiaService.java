@@ -66,7 +66,7 @@ public class EstadiaService {
     private void validarCliente(ClienteModel clienteModel, EstadiaModel estadiaModel) {
         for (EstadiaModel estadia : clienteModel.getEstadias()) {
             if (conflitoHorario(estadia.getInicio(), estadia.getFim(), estadiaModel.getInicio(), estadiaModel.getFim()) && !estadia.getId().equals(estadiaModel.getId())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cliente com ID %d já possui o horário indicado reservado. inicio: %s fim: %s".formatted(clienteModel.getId(), estadia.getInicio(), estadia.getFim()));
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Cliente com ID %d já possui o horário indicado reservado. inicio: %s fim: %s".formatted(clienteModel.getId(), estadia.getInicio(), estadia.getFim()));
             }
         }
     }
@@ -74,7 +74,7 @@ public class EstadiaService {
     private void validarQuarto(QuartoModel quartoModel, EstadiaModel estadiaModel) {
         for (EstadiaModel estadia : quartoModel.getEstadias()) {
             if (conflitoHorario(estadia.getInicio(), estadia.getFim(), estadiaModel.getInicio(), estadiaModel.getFim()) && !estadia.getId().equals(estadiaModel.getId())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Quarto com ID %d já possui o horário indicado reservado. inicio: %s fim: %s".formatted(quartoModel.getId(), estadia.getInicio(), estadia.getFim()));
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Quarto com ID %d já possui o horário indicado reservado. inicio: %s fim: %s".formatted(quartoModel.getId(), estadia.getInicio(), estadia.getFim()));
             }
         }
     }
@@ -112,8 +112,9 @@ public class EstadiaService {
 
     public EstadiaResponseDTO criarEstadia(EstadiaRequestDTO estadiaRequestDTO) {
         EstadiaModel estadiaModel = modelMapper.map(estadiaRequestDTO, EstadiaModel.class);
-        ClienteModel clienteModel = clienteService.findById(estadiaRequestDTO.getCliente());
-        QuartoModel quartoModel = quartoService.findById(estadiaRequestDTO.getQuarto());
+        ClienteModel clienteModel = clienteService.findById(Long.parseLong(estadiaRequestDTO.getCliente()));
+        QuartoModel quartoModel = quartoService.findById(Long.parseLong(estadiaRequestDTO.getQuarto()));
+
         validarEstadia(estadiaModel);
         validarCliente(clienteModel, estadiaModel);
         validarQuarto(quartoModel, estadiaModel);
@@ -141,7 +142,7 @@ public class EstadiaService {
         if (estadiaRequestDTO.getCliente() != null) {
             estadiaModel.getCliente().getEstadias().remove(estadiaModel);
 
-            ClienteModel clienteModel = clienteService.findById(estadiaRequestDTO.getCliente());
+            ClienteModel clienteModel = clienteService.findById(Long.parseLong(estadiaRequestDTO.getCliente()));
             clienteModel.getEstadias().add(estadiaModel);
             estadiaModel.setCliente(clienteModel);
         }
@@ -149,7 +150,7 @@ public class EstadiaService {
         if (estadiaRequestDTO.getQuarto() != null) {
             estadiaModel.getQuarto().getEstadias().remove(estadiaModel);
 
-            QuartoModel quartoModel = quartoService.findById(estadiaRequestDTO.getQuarto());
+            QuartoModel quartoModel = quartoService.findById(Long.parseLong(estadiaRequestDTO.getQuarto()));
             quartoModel.getEstadias().add(estadiaModel);
             estadiaModel.setQuarto(quartoModel);
         }

@@ -3,7 +3,6 @@ package br.com.totvs.hotel.dto.pessoa;
 import br.com.totvs.hotel.dto.endereco.EnderecoRequestDTO;
 import br.com.totvs.hotel.validation.Idade;
 import br.com.totvs.hotel.validation.RG;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -11,9 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,11 +32,9 @@ public abstract class PessoaRequestDTO {
     @NotBlank(message = "cpf não pode ser vazio")
     private String cpf;
 
-    @Idade(message = "dataNascimento informada é inválida")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-    @NotNull(message = "dataNascimento não pode ser nula")
-    private LocalDate dataNascimento;
+    @Idade(message = "dataNascimento deve ser válida no formato dd/MM/yyyy e possuir uma idade entere 1 e 200 anos", minimum = 1, maximum = 200)
+    @NotBlank(message = "dataNascimento não pode ser vazia")
+    private String dataNascimento;
 
     @Valid
     @NotNull(message = "endereco não pode ser nulo")
