@@ -57,7 +57,7 @@ public class QuartoController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     public QuartoResponseDTO atualizarQuarto(@PathVariable("id") Long id, @RequestBody QuartoRequestDTO quartoRequestDTO) {
         return quartoService.atualizarQuarto(id, quartoRequestDTO);
     }

@@ -53,7 +53,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     public ClienteResponseDTO atualizarCliente(@PathVariable("id") Long id, @RequestBody ClienteRequestDTO clienteRequestDTO) {
         return clienteService.atualizarCliente(id, clienteRequestDTO);
     }

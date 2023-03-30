@@ -1,6 +1,5 @@
 package br.com.totvs.hotel.dto.estadia;
 
-import br.com.totvs.hotel.enumeration.estadia.AndamentoEstadia;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;

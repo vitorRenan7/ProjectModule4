@@ -53,7 +53,7 @@ public class RecepcionistaController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.OK)
     public RecepcionistaResponseDTO atualizarRecepcionista(@PathVariable("id") Long id, @RequestBody RecepcionistaRequestDTO recepcionistaRequestDTO) {
         return recepcionistaService.atualizarRecepcionista(id, recepcionistaRequestDTO);
     }
