@@ -18,7 +18,7 @@ public class QuartoController {
     @Autowired
     private QuartoService quartoService;
 
-    @GetMapping("/")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<QuartoResponseDTO> buscarQuartos() {
         return quartoService.buscarQuartos();
@@ -27,8 +27,11 @@ public class QuartoController {
     @GetMapping("/filtro")
     @ResponseStatus(HttpStatus.OK)
     public List<QuartoResponseDTO> buscarQuartos(
-            @RequestParam(value = "categoria", required = false) CategoriaQuarto categoria,
-            @RequestParam(value = "situacao", required = false) SituacaoQuarto situacao) {
+            @RequestParam(value = "categoria", required = false)
+            CategoriaQuarto categoria,
+
+            @RequestParam(value = "situacao", required = false)
+            SituacaoQuarto situacao) {
         return quartoService.buscarQuartos(categoria, situacao);
     }
 
@@ -38,7 +41,7 @@ public class QuartoController {
         return quartoService.buscarQuarto(id);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarQuartos() {
         quartoService.deletarQuartos();
@@ -50,7 +53,7 @@ public class QuartoController {
         quartoService.deletarQuarto(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public QuartoResponseDTO criarQuarto(@Valid @RequestBody QuartoRequestDTO quartoRequestDTO) {
         return quartoService.criarQuarto(quartoRequestDTO);

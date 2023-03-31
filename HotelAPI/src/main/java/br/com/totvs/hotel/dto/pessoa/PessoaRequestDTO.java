@@ -1,8 +1,8 @@
 package br.com.totvs.hotel.dto.pessoa;
 
 import br.com.totvs.hotel.dto.endereco.EnderecoRequestDTO;
-import br.com.totvs.hotel.validation.Idade;
-import br.com.totvs.hotel.validation.RG;
+import br.com.totvs.hotel.validation.annotation.Idade;
+import br.com.totvs.hotel.validation.annotation.RG;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

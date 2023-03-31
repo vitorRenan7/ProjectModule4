@@ -1,12 +1,13 @@
-package br.com.totvs.hotel.validation;
+package br.com.totvs.hotel.validation.validator;
 
+import br.com.totvs.hotel.validation.annotation.CEP;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CelularValidator implements ConstraintValidator<Celular, String> {
+public class CEPValidator implements ConstraintValidator<CEP, String> {
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
@@ -14,7 +15,7 @@ public class CelularValidator implements ConstraintValidator<Celular, String> {
             return false;
         }
 
-        String expression = "^(?:\\(\\d{2}\\)\\s*|\\d{2}\\s*)?(?:\\d{4,5}-?\\d{4})$";
+        String expression = "^([0-9]{5})-?([0-9]{3})$";
         Pattern pattern = Pattern.compile(expression);
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();

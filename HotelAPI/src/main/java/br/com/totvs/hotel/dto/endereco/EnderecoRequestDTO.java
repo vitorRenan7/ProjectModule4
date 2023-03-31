@@ -1,6 +1,6 @@
 package br.com.totvs.hotel.dto.endereco;
 
-import br.com.totvs.hotel.validation.CEP;
+import br.com.totvs.hotel.validation.annotation.CEP;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

@@ -1,5 +1,6 @@
-package br.com.totvs.hotel.validation;
+package br.com.totvs.hotel.validation.annotation;
 
+import br.com.totvs.hotel.validation.validator.RGValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -10,11 +11,10 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = EnumValueValidator.class)
-public @interface EnumValue {
+@Constraint(validatedBy = RGValidator.class)
+public @interface RG {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-    String message() default "enum informado inválido";
-    Class<? extends Enum<?>> enumerator();
+    String message() default "rg informado é inválido";
 
 }

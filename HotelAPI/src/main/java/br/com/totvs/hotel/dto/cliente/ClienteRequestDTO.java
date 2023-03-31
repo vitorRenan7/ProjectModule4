@@ -1,7 +1,7 @@
 package br.com.totvs.hotel.dto.cliente;
 
 import br.com.totvs.hotel.dto.pessoa.PessoaRequestDTO;
-import br.com.totvs.hotel.validation.Celular;
+import br.com.totvs.hotel.validation.annotation.Celular;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

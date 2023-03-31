@@ -1,5 +1,6 @@
-package br.com.totvs.hotel.validation;
+package br.com.totvs.hotel.validation.annotation;
 
+import br.com.totvs.hotel.validation.validator.CelularValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
