@@ -8,11 +8,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestController
@@ -21,7 +19,7 @@ public class EstadiaController {
     @Autowired
     private EstadiaService estadiaService;
 
-    @GetMapping("/")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<EstadiaResponseDTO> buscarEstadias() {
         return estadiaService.buscarEstadias();
@@ -48,7 +46,7 @@ public class EstadiaController {
         return estadiaService.buscarEstadia(id);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarEstadias() {
         estadiaService.deletarEstadias();
@@ -60,7 +58,7 @@ public class EstadiaController {
         estadiaService.deletarEstadia(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public EstadiaResponseDTO criarEstadia(@Valid @RequestBody EstadiaRequestDTO estadiaRequestDTO) {
         return estadiaService.criarEstadia(estadiaRequestDTO);

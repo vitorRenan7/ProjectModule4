@@ -1,5 +1,6 @@
-package br.com.totvs.hotel.validation;
+package br.com.totvs.hotel.validation.annotation;
 
+import br.com.totvs.hotel.validation.validator.CEPValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -10,10 +11,10 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = RGValidator.class)
-public @interface RG {
+@Constraint(validatedBy = CEPValidator.class)
+public @interface CEP {
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-    String message() default "rg informado é inválido";
+    String message() default "cep informado é inválido";
 
 }

@@ -1,6 +1,6 @@
 package br.com.totvs.hotel.dto.estadia;
 
-import br.com.totvs.hotel.validation.Reserva;
+import br.com.totvs.hotel.validation.annotation.Reserva;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;

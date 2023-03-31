@@ -16,7 +16,7 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("/")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ClienteResponseDTO> buscarClientes() {
         return clienteService.buscarClientes();
@@ -34,7 +34,7 @@ public class ClienteController {
         return clienteService.buscarCliente(id);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarClientes() {
         clienteService.deletarClientes();
@@ -46,7 +46,7 @@ public class ClienteController {
         clienteService.deletarCliente(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ClienteResponseDTO criarCliente(@Valid @RequestBody ClienteRequestDTO clienteRequestDTO) {
         return clienteService.criarCliente(clienteRequestDTO);

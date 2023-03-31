@@ -1,7 +1,7 @@
 package br.com.totvs.hotel.dto.quarto;
 
 import br.com.totvs.hotel.enumeration.quarto.CategoriaQuarto;
-import br.com.totvs.hotel.validation.EnumValue;
+import br.com.totvs.hotel.validation.annotation.EnumValue;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

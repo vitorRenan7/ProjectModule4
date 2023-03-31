@@ -16,7 +16,7 @@ public class RecepcionistaController {
     @Autowired
     private RecepcionistaService recepcionistaService;
 
-    @GetMapping("/")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<RecepcionistaResponseDTO> buscarRecepcionistas() {
         return recepcionistaService.buscarRecepcionistas();
@@ -34,7 +34,7 @@ public class RecepcionistaController {
         return recepcionistaService.buscarRecepcionista(id);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarRecepcionistas() {
         recepcionistaService.deletarRecepcionistas();
@@ -46,7 +46,7 @@ public class RecepcionistaController {
         recepcionistaService.deletarRecepcionista(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RecepcionistaResponseDTO criarRecepcionista(@Valid @RequestBody RecepcionistaRequestDTO recepcionistaRequestDTO) {
         return recepcionistaService.criarRecepcionista(recepcionistaRequestDTO);
