@@ -41,7 +41,7 @@ public class EstadiaService {
     }
 
     private EstadiaModel findById(Long id) {
-        return estadiaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        return estadiaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "estadia com id %d não encontrada".formatted(id)));
     }
 
     private void deleteAll() {

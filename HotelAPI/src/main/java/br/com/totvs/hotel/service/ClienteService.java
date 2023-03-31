@@ -36,7 +36,7 @@ public class ClienteService extends PessoaService {
     }
 
     public ClienteModel findById(Long id) {
-        return clienteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return clienteRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "cliente com id %d não encontrado".formatted(id)));
     }
 
     private void deleteAll() {

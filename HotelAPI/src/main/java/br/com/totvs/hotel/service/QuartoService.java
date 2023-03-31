@@ -35,7 +35,7 @@ public class QuartoService {
     }
 
     public QuartoModel findById(Long id) {
-        return quartoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return quartoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "quarto com id %d não encontrado".formatted(id)));
     }
 
     private void deleteAll() {

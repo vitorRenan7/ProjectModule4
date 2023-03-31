@@ -1,15 +1,12 @@
 package br.com.totvs.hotel.dto.quarto;
 
 import br.com.totvs.hotel.enumeration.quarto.CategoriaQuarto;
-import br.com.totvs.hotel.enumeration.quarto.SituacaoQuarto;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import br.com.totvs.hotel.validation.EnumValue;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Range;
 
 import java.util.List;
 
@@ -18,21 +15,23 @@ import java.util.List;
 @Getter
 @Setter
 public class QuartoRequestDTO {
-    @Range(min = 1, max = 200, message = "numero precisa estar entre 1 e 200")
-    @NotNull(message = "numero não pode ser nulo")
-    private Integer numero;
+    @Pattern(regexp = "^\\d{1,3}$", message = "numero precisa ser um inteiro de 1 a 3 digitos")
+    @NotBlank(message = "numero não pode ser vazio")
+    private String numero;
 
+    @Size(min = 1, max = 200, message = "descricao precisa ter entre 1 e 200 caracteres")
     @NotBlank(message = "descricao não pode ser vazia")
     private String descricao;
 
-    @NotNull(message = "categoria não pode ser nula")
-    private CategoriaQuarto categoria;
+    @EnumValue(enumerator = CategoriaQuarto.class, message = "categoria precisa ser uma entre ECONOMICO, SUITE, PRESIDENCIAL")
+    @NotBlank(message = "categoria não pode ser nula")
+    private String categoria;
 
-    @Range(min = 1, max = 99999, message = "precoHora precisa estar entre 1 e 99999")
-    @NotNull(message = "precoHora não pode ser nulo")
-    private Double precoHora;
+    @Pattern(regexp = "^(\\d{1,4}\\.)?(\\d){1,4}$", message = "precoHora precisa ser um decimal de 1 a 4 digitos")
+    @NotBlank(message = "precoHora não pode ser vazio")
+    private String precoHora;
 
-    @NotNull(message = "imagens não pode ser nula")
+    @Size(min = 1, max = 10, message = "imagens precisa ter entre 1 e 10 urls")
     @NotEmpty(message = "imagens não pode ser vazia")
     private List<String> imagens;
 
