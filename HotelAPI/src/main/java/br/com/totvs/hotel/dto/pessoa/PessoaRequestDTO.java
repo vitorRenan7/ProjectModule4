@@ -16,11 +16,11 @@ import org.hibernate.validator.constraints.br.CPF;
 @Getter
 @Setter
 public abstract class PessoaRequestDTO {
-    @Size(min = 1, max = 200, message = "nome precisa ter até 200 caracteres")
+    @Size(min = 1, max = 200, message = "nome precisa ter entre 1 e 200 caracteres")
     @NotBlank(message = "nome não pode ser vazio")
     private String nome;
 
-    @Size(min = 1, max = 200, message = "sobrenome precisa ter até 200 caracteres")
+    @Size(min = 1, max = 200, message = "sobrenome precisa ter entre 1 e 200 caracteres")
     @NotBlank(message = "sobrenome não pode ser vazio")
     private String sobrenome;
 
@@ -32,7 +32,7 @@ public abstract class PessoaRequestDTO {
     @NotBlank(message = "cpf não pode ser vazio")
     private String cpf;
 
-    @Idade(message = "dataNascimento deve ser válida no formato dd/MM/yyyy e possuir uma idade entere 1 e 200 anos", minimum = 1, maximum = 200)
+    @Idade(minimum = 1, maximum = 200, message = "dataNascimento deve ser válida no formato dd/MM/yyyy e possuir uma idade entere 1 e 200 anos")
     @NotBlank(message = "dataNascimento não pode ser vazia")
     private String dataNascimento;
 

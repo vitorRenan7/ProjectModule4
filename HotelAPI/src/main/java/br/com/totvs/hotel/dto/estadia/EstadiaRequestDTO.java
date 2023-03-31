@@ -2,7 +2,6 @@ package br.com.totvs.hotel.dto.estadia;
 
 import br.com.totvs.hotel.validation.Reserva;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,12 +21,12 @@ public class EstadiaRequestDTO {
     @NotBlank(message = "fim não pode ser vazio")
     private String fim;
 
-    @NotNull(message = "cliente não pode ser nulo")
-    @Pattern(regexp = "^\\d{1,8}$", message = "cliente deve ser um id de 1 a 8 digitos")
+    @Pattern(regexp = "^\\d{1,8}$", message = "cliente deve ser um inteiro de 1 a 8 digitos")
+    @NotBlank(message = "cliente não pode ser vazio")
     private String cliente;
 
-    @NotNull(message = "quarto não pode ser nulo")
-    @Pattern(regexp = "^\\d{1,8}$", message = "quarto deve ser um id de 1 a 8 digitos")
+    @Pattern(regexp = "^\\d{1,8}$", message = "quarto deve ser um inteiro de 1 a 8 digitos")
+    @NotBlank(message = "quarto não pode ser vazio")
     private String quarto;
 
 }

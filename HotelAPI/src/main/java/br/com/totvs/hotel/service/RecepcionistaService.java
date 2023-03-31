@@ -32,7 +32,7 @@ public class RecepcionistaService extends PessoaService {
     }
 
     private RecepcionistaModel findById(Long id) {
-        return recepcionistaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return recepcionistaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "recepcionista com id %d não encontrado".formatted(id)));
     }
 
     private void deleteAll() {
