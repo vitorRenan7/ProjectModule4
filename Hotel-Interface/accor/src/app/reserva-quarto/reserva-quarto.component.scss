@@ -36,8 +36,6 @@
         }
     }
 
-    //MODAL
-
     .lista-quartos{
         position:  absolute;
         background-color: red;
@@ -59,7 +57,43 @@
             float: right;
             width: 234px;
         }
-    }
+    }  
+}
 
-  
+//MODAL
+.custom-modal-header {
+    text-decoration: none;
+
+}
+
+.custom-modal-body {
+   padding: 20px;
+   font-size: 16px;
+}
+
+.modal-body{
+    background-color: blue;
+    height: 100%;
+
+    .btn-cadastro-cliente{
+        width: 150px;
+        height: 50px;
+        margin-left: 10px;
+        border: none;
+        border-radius: 10px;
+        background-color: #000;
+        color: #f2f2f2;
+        font-weight: bold;
+    }
+}
+
+.cadastro-cliente{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    color: #000;
+    margin-left: 5px;
+    font-weight: bold;
 }

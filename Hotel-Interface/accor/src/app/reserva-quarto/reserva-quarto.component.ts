@@ -11,13 +11,15 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class ReservaQuartoComponent {
 
   modalRef?: BsModalRef;
-  config = {
-    animated: true
-  };
-  constructor(private modalService: BsModalService) {}
- 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, this.config);
+  items: any[];
+  constructor(private modalService: BsModalService) {
+    this.items = Array(1).fill(0);
   }
-
+ 
+  openModalCadastroCliente(customModalTemplate: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(
+      customModalTemplate,
+      Object.assign({}, { class: 'gray modal-lg' })
+    );
+  }
 }

@@ -3,35 +3,55 @@
 
         <!-- HEADER -->
         <div id="buttons-top">
-            <button class="buscar-cliente">Buscar Cliente</button>
-            <button class="cadastro-cliente" (click)="openModal(template)">Cadastrar Cliente</button>
+            <button class="buscar-cliente" >Buscar Cliente</button>
+            <button class="cadastro-cliente" (click)="openModalCadastroCliente(customModalTemplate)">Cadastrar Cliente</button>
         </div>
 
         <!-- MODAL CADASTRO CLIENTE -->
 
-        <ng-template #template>
+        <ng-template #customModalTemplate>
+          <div class="modal-header">
+            <h4 class="modal-title">Cadastro Cliente</h4>
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+              <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+          </div>
 
-            <div class="modal-header">
-                <h4 class="modal-title pull-left">Cadastro Cliente</h4>
-                <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
-                  <span aria-hidden="true" class="visually-hidden">&times;</span>
-                </button>
+          <div class="modal-body custom-modal-body" *ngFor="let item of items">
+            <div class="form-group">
+                <form class="cadastro-cliente">
+                <label for="nome">Nome</label>
+                <input type="text" name="sobrenome" id="nome" placeholder="Digite o nome do Cliente" required>
+
+                <label for="sobrenome">Sobrenome</label>
+                <input type="text" name="sobrenome" id="sobrenome" placeholder="Digite o sobrenome do Cliente" required>
+
+                <label for="rg">RG</label>
+                <input type="int" name="rg" id="rg" placeholder="Digite o RG do Cliente" required>
+
+                <label for="CPF">CPF</label>
+                <input type="text" name="cpf" id="cpf" placeholder="Digite o CPF do Cliente" required>
+
+                <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+                <input type="text" placeholder="Digite a data de nascimento" required>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Digite o E-mail" required>
+
+                <label for="celular">Celular</label>
+                <input type="text" name="celular" id="celular" placeholder="Digite o celular" required >
+              </form>
             </div>
 
-            <div class="modal-body">
-                <div class="modal-overlay">
-                    <div class="modal-content">
-                        <form>
-                            <label for="nome">Nome:</label>
-                            <input type="text" placeholder="Digite o nome do Cliente" required>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <button class="btn-cadastro-cliente">Cadastrar</button>
 
+          </div>
         </ng-template>
-
         
+          
+
+
+
 
       
         <div class="lista-quartos">
