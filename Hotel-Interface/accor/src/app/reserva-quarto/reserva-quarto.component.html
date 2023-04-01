@@ -3,8 +3,16 @@
 
         <div id="buttons-top">
             <button class="buscar-cliente">Buscar Cliente</button>
-            <button class="cadastro-cliente">Cadastrar Cliente</button>
+            <button class="cadastro-cliente" (click)="abrirModal()">Cadastrar Cliente</button>
+
+            
+
          </div>
+
+         <app-modal-cadastro-cliente *ngIf="modalAberto" (fecharModal)="modalAberto=false"></app-modal-cadastro-cliente>
+
+         
+
 
         <div class="lista-quartos">
             <p>Lista de quartos</p>

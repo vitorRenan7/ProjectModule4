@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ReservaQuartoComponent {
 
+  modalAberto = false;
+
+  abrirModal(){
+    this.modalAberto = true;
+  }
+
 }
