@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: 'reserva-quarto', component: ReservaQuartoComponent },
-  { path: '', component: LoginComponent }
+  { path: '', component: LoginComponent },
 ];
 
 @NgModule({

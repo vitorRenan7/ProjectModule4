@@ -1,19 +1,39 @@
 <main>
     <div id="reserva">
 
+        <!-- HEADER -->
         <div id="buttons-top">
             <button class="buscar-cliente">Buscar Cliente</button>
-            <button class="cadastro-cliente" (click)="abrirModal()">Cadastrar Cliente</button>
+            <button class="cadastro-cliente" (click)="openModal(template)">Cadastrar Cliente</button>
+        </div>
 
-            
+        <!-- MODAL CADASTRO CLIENTE -->
 
-         </div>
+        <ng-template #template>
 
-         <app-modal-cadastro-cliente *ngIf="modalAberto" (fecharModal)="modalAberto=false"></app-modal-cadastro-cliente>
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Cadastro Cliente</h4>
+                <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+                  <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
 
-         
+            <div class="modal-body">
+                <div class="modal-overlay">
+                    <div class="modal-content">
+                        <form>
+                            <label for="nome">Nome:</label>
+                            <input type="text" placeholder="Digite o nome do Cliente" required>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
+        </ng-template>
 
+        
+
+      
         <div class="lista-quartos">
             <p>Lista de quartos</p>
         </div>
