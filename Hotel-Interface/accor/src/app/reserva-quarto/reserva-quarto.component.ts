@@ -10,16 +10,26 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class ReservaQuartoComponent {
 
-  modalRef?: BsModalRef;
-  items: any[];
+  modalRef1?: BsModalRef;
+  modalRef2?: BsModalRef;
+
+  items1: any[];
+  items2: any[];
+
   constructor(private modalService: BsModalService) {
-    this.items = Array(1).fill(0);
+    this.items1 = Array(1).fill(0);
+    this.items2 = Array(1).fill(0);
   }
  
   openModalCadastroCliente(customModalTemplate: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(
+    this.modalRef1 = this.modalService.show(
       customModalTemplate,
       Object.assign({}, { class: 'gray modal-lg' })
     );
+  }
+
+  openBuscarCliente(customModalTemplate: TemplateRef<any>) {
+    this.modalRef2 = this.modalService.show(
+      customModalTemplate, { class: 'my-custom-modal' });
   }
 }

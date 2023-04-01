@@ -60,7 +60,7 @@
     }  
 }
 
-//MODAL
+//MODAL CADASTRO CLIENTE
 .custom-modal-header {
     text-decoration: none;
 
@@ -96,4 +96,15 @@ label{
     color: #000;
     margin-left: 5px;
     font-weight: bold;
+}
+
+//MODAL BUSCAR CLIENTE
+
+.modal-header-template2{
+    text-decoration: none;
+}
+
+.custom-modal-template2{
+    color: blue;
+    background-color: orange;
 }

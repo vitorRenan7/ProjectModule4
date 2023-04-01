@@ -3,7 +3,7 @@
 
         <!-- HEADER -->
         <div id="buttons-top">
-            <button class="buscar-cliente" >Buscar Cliente</button>
+            <button class="buscar-cliente"   (click)="openBuscarCliente(customModalTemplate2)">Buscar Cliente</button>
             <button class="cadastro-cliente" (click)="openModalCadastroCliente(customModalTemplate)">Cadastrar Cliente</button>
         </div>
 
@@ -12,12 +12,12 @@
         <ng-template #customModalTemplate>
           <div class="modal-header">
             <h4 class="modal-title">Cadastro Cliente</h4>
-            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef1?.hide()">
               <span aria-hidden="true" class="visually-hidden">&times;</span>
             </button>
           </div>
 
-          <div class="modal-body custom-modal-body" *ngFor="let item of items">
+          <div class="modal-body custom-modal-body" *ngFor="let item of items1">
             <div class="form-group">
                 <form class="cadastro-cliente">
                 <label for="nome">Nome</label>
@@ -45,6 +45,20 @@
 
             <button class="btn-cadastro-cliente">Cadastrar</button>
 
+          </div>
+        </ng-template>
+
+        <!-- MODAL BUSCAR CLIENTE -->
+
+        <ng-template #customModalTemplate2>
+          <div class="modal-header">
+            <h4 class="modal-title">Cadastro Cliente</h4>
+            <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef2?.hide()">
+              <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+          </div>
+          <div class="custom-modal-template2" *ngFor="let item of items1">
+            <!-- CORPO MODAL TEMPLATE2 -->
           </div>
         </ng-template>
         
