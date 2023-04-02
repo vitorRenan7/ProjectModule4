@@ -16,10 +16,14 @@ export class ReservaQuartoComponent {
   items1: any[];
   items2: any[];
 
+
   constructor(private modalService: BsModalService) {
+    this.searchText = '';
     this.items1 = Array(1).fill(0);
     this.items2 = Array(1).fill(0);
   }
+
+
  
   openModalCadastroCliente(customModalTemplate: TemplateRef<any>) {
     this.modalRef1 = this.modalService.show(
@@ -32,4 +36,11 @@ export class ReservaQuartoComponent {
     this.modalRef2 = this.modalService.show(
       customModalTemplate, { class: 'my-custom-modal' });
   }
+
+  searchText: string;
+
+  performSearch() {
+    console.log('Buscando por', this.searchText);
+  }
+
 }

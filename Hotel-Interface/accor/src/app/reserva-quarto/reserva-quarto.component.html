@@ -59,6 +59,10 @@
           </div>
           <div class="custom-modal-template2" *ngFor="let item of items1">
             <!-- CORPO MODAL TEMPLATE2 -->
+
+            <input type="text" [(ngModel)]="searchText">
+            <button (click)="performSearch()">Pesquisar</button>
+        
           </div>
         </ng-template>
         

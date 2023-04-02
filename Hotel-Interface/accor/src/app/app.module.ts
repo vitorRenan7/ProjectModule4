@@ -10,6 +10,7 @@ import { AdministradorComponent } from './administrador/administrador.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     AppRoutingModule,
     BrowserAnimationsModule,
     ModalModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    // Barra de pesquisa
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
