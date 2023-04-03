@@ -1,7 +1,7 @@
 import { Component, TemplateRef } from '@angular/core';
-
+import { FormControl, FormGroup } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-
+import { ReservaQuartoService } from './ReservaQuarto.service';
 
 @Component({
   selector: 'app-reserva-quarto',
@@ -16,11 +16,33 @@ export class ReservaQuartoComponent {
   items1: any[];
   items2: any[];
 
+  cadastro: FormGroup;
 
-  constructor(private modalService: BsModalService) {
+
+  constructor(private modalService: BsModalService, private reservaQuartoService: ReservaQuartoService) {
+    this.cadastro = new FormGroup({
+      nome: new FormControl(''),
+      sobrenome: new FormControl(''),
+      rg: new FormControl(''),
+      cpf: new FormControl(''),
+      dataNascimento: new FormControl(''),
+      email: new FormControl(''),
+      celular: new FormControl('')      
+    });
+
     this.searchText = '';
     this.items1 = Array(1).fill(0);
     this.items2 = Array(1).fill(0);
+  }
+
+  dadosCadastro(cadastro: FormGroup){
+    this.reservaQuartoService.cadastrar(this.cadastro.value).subscribe(res => {
+      console.log(res);
+    },
+    error =>{
+      console.error(error);
+    }
+    );
   }
 
 

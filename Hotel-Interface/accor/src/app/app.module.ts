@@ -5,12 +5,12 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ReservaQuartoComponent } from './reserva-quarto/reserva-quarto.component';
 import { AdministradorComponent } from './administrador/administrador.component';
-
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,15 +19,19 @@ import { FormsModule } from '@angular/forms';
     AdministradorComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ModalModule,
     ModalModule.forRoot(),
-    // Barra de pesquisa
-    FormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
