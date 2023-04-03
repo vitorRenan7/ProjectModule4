@@ -38,9 +38,6 @@ export class ReservaQuartoComponent {
   dadosCadastro(cadastro: FormGroup){
     this.reservaQuartoService.cadastrar(this.cadastro.value).subscribe(res => {
       console.log(res);
-    },
-    error =>{
-      console.error(error);
     }
     );
   }
