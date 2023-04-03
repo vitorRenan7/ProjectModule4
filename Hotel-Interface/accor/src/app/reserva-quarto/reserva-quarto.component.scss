@@ -1,0 +1,111 @@
+#reserva{
+    position: relative;
+    margin-top: 5px;
+    width:  180vh;
+    height: 98vh;
+    background-color: aqua;
+
+    button{
+        position: relative;
+        margin: 10px;
+        height: 30px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    #buttons-top{
+        position: absolute;
+        overflow: hidden;
+        margin-top: 25px;
+        width: 180vh;
+        height: 50px;
+        background-color: black;
+
+
+
+        .buscar-cliente{
+            float: left;         
+            width: 536px;
+        }
+
+        .cadastro-cliente{
+            float: right;
+            width: 234px;
+        }
+    }
+
+    .lista-quartos{
+        position:  absolute;
+        background-color: red;
+        margin-top: 16vh;
+        width: 180vh;
+        height: 70vh;
+        text-align: center;
+    }
+
+    .button-reservar{
+        position: absolute;
+        display: inline-block;
+        height: 50px;
+        bottom: 2.5vh;
+        width: 180vh;
+        background-color: black;
+
+        .reservar-quarto{
+            float: right;
+            width: 234px;
+        }
+    }  
+}
+
+//MODAL CADASTRO CLIENTE
+.custom-modal-header {
+    text-decoration: none;
+
+}
+
+.custom-modal-body {
+   padding: 20px;
+   font-size: 16px;
+}
+
+.modal-body{
+    background-color: blue;
+    height: 100%;
+
+    .btn-cadastro-cliente{
+        width: 150px;
+        height: 50px;
+        margin-left: 10px;
+        border: none;
+        border-radius: 10px;
+        background-color: #000;
+        color: #f2f2f2;
+        font-weight: bold;
+    }
+}
+
+.cadastro-cliente{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    color: #000;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+//MODAL BUSCAR CLIENTE
+
+.modal-header-template2{
+    text-decoration: none;
+}
+
+.custom-modal-template2{
+    color: blue;
+    background-color: orange;
+    height: 35vh;
+}
