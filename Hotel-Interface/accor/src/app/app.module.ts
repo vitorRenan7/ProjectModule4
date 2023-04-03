@@ -10,6 +10,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { ReservaQuartoService } from './reserva-quarto/ReservaQuarto.service';
 
 @NgModule({
   declarations: [
@@ -28,10 +29,10 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule
-    
   ],
-  providers: [],
+
+  providers: [ReservaQuartoService],
   bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+export class AppModule {}
