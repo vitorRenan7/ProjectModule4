@@ -1,5 +1,6 @@
 package br.com.totvs.hotel.controller;
 
+import br.com.totvs.hotel.dto.recepcionista.RecepcionistaLoginDTO;
 import br.com.totvs.hotel.dto.recepcionista.RecepcionistaRequestDTO;
 import br.com.totvs.hotel.dto.recepcionista.RecepcionistaResponseDTO;
 import br.com.totvs.hotel.service.RecepcionistaService;
@@ -50,6 +51,12 @@ public class RecepcionistaController {
     @ResponseStatus(HttpStatus.CREATED)
     public RecepcionistaResponseDTO criarRecepcionista(@Valid @RequestBody RecepcionistaRequestDTO recepcionistaRequestDTO) {
         return recepcionistaService.criarRecepcionista(recepcionistaRequestDTO);
+    }
+
+    @PostMapping("/login")
+    @ResponseStatus(HttpStatus.OK)
+    public RecepcionistaResponseDTO buscarUsuarioSenhaRecepcionista(@Valid @RequestBody RecepcionistaLoginDTO recepcionistaLoginDTO) {
+        return recepcionistaService.buscarUsuarioSenhaRecepcionista(recepcionistaLoginDTO);
     }
 
     @PutMapping("/{id}")

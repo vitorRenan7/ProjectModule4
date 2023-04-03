@@ -13,4 +13,10 @@ public interface RecepcionistaRepository extends JpaRepository<RecepcionistaMode
     @Query(value = "SELECT * FROM TABLE_RECEPCIONISTA WHERE TABLE_RECEPCIONISTA.NOME LIKE %:nome% OR TABLE_RECEPCIONISTA.SOBRENOME LIKE %:nome%", nativeQuery = true)
     List<RecepcionistaModel> buscarRecepcionistasPorNomeCompleto(@Param("nome") String nome);
 
+    @Query(value = "SELECT * FROM TABLE_RECEPCIONISTA WHERE TABLE_RECEPCIONISTA.usuario = :usuario AND TABLE_RECEPCIONISTA.SENHA = :senha", nativeQuery = true)
+    RecepcionistaModel buscarUsuarioSenhaRecepcionista(@Param("usuario") String usuario, @Param("senha") String senha);
+
+    @Query(value = "SELECT * FROM TABLE_RECEPCIONISTA WHERE TABLE_RECEPCIONISTA.usuario = :usuario", nativeQuery = true)
+    RecepcionistaModel buscarUsuarioRecepcionista(@Param("usuario") String usuario);
+
 }
