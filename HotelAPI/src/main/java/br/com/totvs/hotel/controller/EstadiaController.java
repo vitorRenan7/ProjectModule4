@@ -1,5 +1,6 @@
 package br.com.totvs.hotel.controller;
 
+import br.com.totvs.hotel.dto.estadia.EstadiaFiltroDTO;
 import br.com.totvs.hotel.dto.estadia.EstadiaRequestDTO;
 import br.com.totvs.hotel.dto.estadia.EstadiaResponseDTO;
 import br.com.totvs.hotel.service.EstadiaService;
@@ -27,17 +28,8 @@ public class EstadiaController {
 
     @GetMapping("/filtro")
     @ResponseStatus(HttpStatus.OK)
-    public List<EstadiaResponseDTO> buscarEstadias(
-            @RequestParam(value = "inicio", required = true)
-            @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
-            @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-            LocalDateTime dataInicio,
-            @RequestParam(value = "fim", required = false)
-            @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
-            @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-            LocalDateTime dataFim
-    ) {
-        return estadiaService.buscarEstadias(dataInicio, dataFim);
+    public List<EstadiaResponseDTO> buscarEstadias(@Valid @ModelAttribute EstadiaFiltroDTO estadiaFiltroDTO) {
+        return estadiaService.buscarEstadias(estadiaFiltroDTO);
     }
 
     @GetMapping("/{id}")

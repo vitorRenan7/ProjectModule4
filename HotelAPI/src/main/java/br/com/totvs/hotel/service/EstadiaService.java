@@ -1,5 +1,6 @@
 package br.com.totvs.hotel.service;
 
+import br.com.totvs.hotel.dto.estadia.EstadiaFiltroDTO;
 import br.com.totvs.hotel.dto.estadia.EstadiaRequestDTO;
 import br.com.totvs.hotel.dto.estadia.EstadiaResponseDTO;
 import br.com.totvs.hotel.enumeration.estadia.AndamentoEstadia;
@@ -16,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -92,8 +94,11 @@ public class EstadiaService {
         return findAll().stream().map(estadiaModel -> modelMapper.map(estadiaModel, EstadiaResponseDTO.class)).collect(Collectors.toList());
     }
 
-    public List<EstadiaResponseDTO> buscarEstadias(LocalDateTime dataInicio, LocalDateTime dataFim) {
-        dataFim = dataFim != null ? dataFim : LocalDateTime.now().plusYears(1);
+    public List<EstadiaResponseDTO> buscarEstadias(EstadiaFiltroDTO estadiaFiltroDTO) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime dataInicio = LocalDateTime.parse(estadiaFiltroDTO.getInicio(),dateTimeFormatter);
+        LocalDateTime dataFim = LocalDateTime.parse(estadiaFiltroDTO.getFim(), dateTimeFormatter);
+
         return estadiaRepository.buscarEstadiasPorData(dataInicio, dataFim).stream().map(estadiaModel -> modelMapper.map(estadiaModel, EstadiaResponseDTO.class)).collect(Collectors.toList());
     }
 
