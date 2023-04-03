@@ -1,5 +1,6 @@
 package br.com.totvs.hotel.service;
 
+import br.com.totvs.hotel.dto.quarto.QuartoFiltroDTO;
 import br.com.totvs.hotel.dto.quarto.QuartoRequestDTO;
 import br.com.totvs.hotel.dto.quarto.QuartoResponseDTO;
 import br.com.totvs.hotel.enumeration.quarto.CategoriaQuarto;
@@ -54,15 +55,17 @@ public class QuartoService {
         return findAll().stream().map(quartoModel -> modelMapper.map(quartoModel, QuartoResponseDTO.class)).collect(Collectors.toList());
     }
 
-    public List<QuartoResponseDTO> buscarQuartos(CategoriaQuarto categoria, SituacaoQuarto situacao) {
+    public List<QuartoResponseDTO> buscarQuartos(QuartoFiltroDTO quartoFiltroDTO) {
+        applicationService.validarCampos(quartoFiltroDTO);
+
         QuartoModel quartoModel = new QuartoModel();
-        quartoModel.setCategoria(categoria);
-        quartoModel.setSituacao(situacao);
+        modelMapper.map(quartoFiltroDTO, quartoModel);
 
         ExampleMatcher exampleMatcher = ExampleMatcher.matching().
                 withIgnoreNullValues().
-                withMatcher("categoria", exact().ignoreCase()).
-                withMatcher("situacao", exact().ignoreCase());
+                withIgnoreCase().
+                withMatcher("categoria", exact()).
+                withMatcher("situacao", exact());
 
         Example<QuartoModel> example = Example.of(quartoModel, exampleMatcher);
         return quartoRepository.findAll(example).stream().map(quarto -> modelMapper.map(quarto, QuartoResponseDTO.class)).collect(Collectors.toList());
@@ -88,12 +91,7 @@ public class QuartoService {
     }
 
     public QuartoResponseDTO atualizarQuarto(Long id, QuartoRequestDTO quartoRequestDTO) {
-        applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getNumero(), "numero");
-        applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getDescricao(), "descricao");
-        applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getCategoria(), "categoria");
-        applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getPrecoHora(), "precoHora");
-        applicationService.validarCampo(quartoRequestDTO, quartoRequestDTO.getImagens(), "imagens");
-
+        applicationService.validarCampos(quartoRequestDTO);
         QuartoModel quartoModel = findById(id);
 
         if (quartoRequestDTO.getImagens() != null) {

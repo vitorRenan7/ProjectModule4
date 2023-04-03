@@ -21,7 +21,7 @@ public class EnumValueValidator implements ConstraintValidator<EnumValue, String
             return false;
         }
 
-        return Arrays.stream(enumerator.getEnumConstants()).map(Enum::name).toList().contains(s.toUpperCase());
+        return Arrays.stream(enumerator.getEnumConstants()).map(Enum::name).toList().contains(s);
     }
 
 }
