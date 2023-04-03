@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http"
+import { Observable } from "rxjs";
 
 //
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 
 //
 
@@ -16,7 +15,7 @@ export class ReservaQuartoService {
   constructor(private http: HttpClient) { }
 
   // ' :any ', pode ser qualquer coisa
-  cadastrar(dados: any){
-    return this.http.post(this.urlApi, dados)
+  cadastrar(dados: any): Observable<any>{
+    return this.http.post(this.urlApi, dados, {withCredentials: true, responseType: 'json'})
   }
 }
