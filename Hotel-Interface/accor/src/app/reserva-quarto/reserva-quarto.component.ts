@@ -43,8 +43,6 @@ export class ReservaQuartoComponent {
     }
     );
   }
-
-
  
   openModalCadastroCliente(customModalTemplate: TemplateRef<any>) {
     this.modalRef1 = this.modalService.show(
@@ -63,5 +61,4 @@ export class ReservaQuartoComponent {
   performSearch() {
     console.log('Buscando por', this.searchText);
   }
-
 }
