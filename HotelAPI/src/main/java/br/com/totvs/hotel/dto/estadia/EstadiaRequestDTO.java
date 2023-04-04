@@ -1,38 +1,32 @@
 package br.com.totvs.hotel.dto.estadia;
 
-import br.com.totvs.hotel.enumeration.estadia.AndamentoEstadia;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotNull;
+import br.com.totvs.hotel.validation.annotation.Reserva;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 public class EstadiaRequestDTO {
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
-    @Future(message = "inicio precisa ser uma data futura")
-    @NotNull(message = "inicio não pode ser nulo")
-    private LocalDateTime inicio;
+    @Reserva(pattern = "dd/MM/yyyy HH:mm", message = "inicio deve ser uma data válida no formato dd/MM/yyyy HH:mm")
+    @NotBlank(message = "inicio não pode ser vazio")
+    private String inicio;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
-    @Future(message = "fim precisa ser uma data futura")
-    @NotNull(message = "fim não pode ser nulo")
-    private LocalDateTime fim;
+    @Reserva(pattern = "dd/MM/yyyy HH:mm", message = "fim deve ser uma data válida no formato dd/MM/yyyy HH:mm")
+    @NotBlank(message = "fim não pode ser vazio")
+    private String fim;
 
-    @NotNull(message = "cliente não pode ser nulo")
-    private Long cliente;
+    @Pattern(regexp = "^\\d{1,8}$", message = "cliente deve ser um inteiro de 1 a 8 digitos")
+    @NotBlank(message = "cliente não pode ser vazio")
+    private String cliente;
 
-    @NotNull(message = "quarto não pode ser nulo")
-    private Long quarto;
+    @Pattern(regexp = "^\\d{1,8}$", message = "quarto deve ser um inteiro de 1 a 8 digitos")
+    @NotBlank(message = "quarto não pode ser vazio")
+    private String quarto;
 
 }
