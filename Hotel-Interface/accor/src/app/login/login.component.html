@@ -8,7 +8,15 @@
 
             <label for="password">Senha</label>
             <input class="inp" type="password" name="senha" id="senha" placeholder="Senha"><br>
-            <button class="btnEntrar" routerLinkActive="active" routerLink="reserva-quarto">Entrar</button>
+
+            <!-- <mat-slide-toggle>Toggle me!</mat-slide-toggle> -->
+
+            <div class="spinner-container" *ngIf="showSpinner">
+              <mat-spinner [diameter]="50" color="accent"></mat-spinner>
+            </div>
+            
+
+            <button class="btnEntrar" (click)="login()">Entrar</button>
           </form>
         </div>
     </div>

@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReservaQuartoService } from './reserva-quarto/ReservaQuarto.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ReservaQuartoService } from './reserva-quarto/ReservaQuarto.service';
     ModalModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSlideToggleModule,
+    MatProgressSpinnerModule
   ],
 
   providers: [ReservaQuartoService],
