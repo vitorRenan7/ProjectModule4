@@ -4,7 +4,8 @@ export interface Cliente{
     rg: string;
     cpf: string;
     dataNascimento: string;
+    cep: string,
+    numero: string;
     email: string;
     celular: string;
-    cep: string;
 }
