@@ -6,4 +6,5 @@ export interface Cliente{
     dataNascimento: string;
     email: string;
     celular: string;
+    cep: string;
 }

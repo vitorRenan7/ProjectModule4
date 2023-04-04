@@ -27,7 +27,8 @@ export class ReservaQuartoComponent {
       cpf: new FormControl(''),
       dataNascimento: new FormControl(''),
       email: new FormControl(''),
-      celular: new FormControl('')      
+      celular: new FormControl(''),
+      cep: new FormControl('')    
     });
 
     this.searchText = '';
