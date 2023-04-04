@@ -1,1 +1,16 @@
-<p>administrador works!</p>
+<div id="container">
+    <div id="container-esquerdo">
+        <button (click)="enviarRequisicaoRecepcionistas()" id="botao-recepcionista">Recepcionistas</button>
+        <button (click)="enviarRequisicaoQuartos()" id="botao-quarto">Quartos</button>
+        <button (click)="enviarRequisicaoClientes()" id="botao-cliente">Clientes</button>
+    </div>
+    <div id="container-direito">
+        <ul id="lista-conteudo">
+            <li class="lista-item" *ngFor="let objeto of listaDeObjetos">
+                <span *ngIf="objeto.usuario">{{ objeto.nome }} - {{ objeto.usuario }}</span>
+                <span *ngIf="objeto.email">{{ objeto.nome }} - {{ objeto.email }}</span>
+                <span *ngIf="objeto.numero">{{ objeto.numero }} - {{ objeto.descricao}} - {{objeto.categoria}}</span>
+            </li>
+        </ul>
+    </div>
+</div>
