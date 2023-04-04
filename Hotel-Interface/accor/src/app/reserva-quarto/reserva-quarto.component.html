@@ -3,7 +3,7 @@
 
         <!-- HEADER -->
         <div id="buttons-top">
-            <button class="buscar-cliente" (click)="openBuscarCliente(customModalTemplate2)">Buscar Cliente</button>
+            <button class="buscar-cliente">Buscar Cliente</button>
             <button class="cadastro-cliente" (click)="openModalCadastroCliente(customModalTemplate)">Cadastrar Cliente</button>
         </div>
 
@@ -35,7 +35,7 @@
                 <label for="CPF">CPF</label>
                 <input type="text" name="cpf" id="cpf" placeholder="Digite o CPF do Cliente" ngModel formControlName="cpf" required>
 
-                <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+                <label for="dataNascimento">Data de Nascimento</label>
                 <input type="text" placeholder="Digite a data de nascimento" ngModel formControlName="dataNascimento" required>
 
                 <label for="cep">Cep</label>
@@ -70,9 +70,6 @@
           <div class="custom-modal-template2" *ngFor="let item of items1">
 
             <!-- CORPO MODAL TEMPLATE2 -->
-
-            <input type="text" [(ngModel)]="searchText">
-            <button (click)="performSearch()">Pesquisar</button>
         
           </div>
         </ng-template>

@@ -32,7 +32,7 @@ export class ReservaQuartoComponent {
       celular: new FormControl('')        
     });
 
-    this.searchText = '';
+
     this.items1 = Array(1).fill(0);
     this.items2 = Array(1).fill(0);
   }
@@ -54,11 +54,5 @@ export class ReservaQuartoComponent {
   openBuscarCliente(customModalTemplate: TemplateRef<any>) {
     this.modalRef2 = this.modalService.show(
       customModalTemplate, { class: 'my-custom-modal' });
-  }
-
-  searchText: string;
-
-  performSearch() {
-    console.log('Buscando por', this.searchText);
   }
 }

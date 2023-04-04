@@ -72,13 +72,15 @@
 }
 
 .modal-body{
-    background-color: blue;
-    height: 100%;
+    background-color: whitesmoke;
+    width: 100vh;
+    height: 95%;
 
     .btn-cadastro-cliente{
         width: 150px;
         height: 50px;
-        margin-left: 10px;
+        margin-top: 15px;
+        margin-left: 33.5vh;
         border: none;
         border-radius: 10px;
         background-color: #000;
