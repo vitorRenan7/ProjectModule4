@@ -20,8 +20,9 @@
           <div class="modal-body custom-modal-body" *ngFor="let item of items1">
             
             <div class="form-group" >              
+              
                 <form class="cadastro-cliente" [formGroup]= "cadastro" (ngSubmit)="dadosCadastro(cadastro)">
-                  // Barra de pesquisa
+
                 <label for="nome">Nome</label>
                 <input type="text" name="sobrenome" id="nome" placeholder="Digite o nome do Cliente" ngModel formControlName="nome" required>
 
